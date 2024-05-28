@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca2b069c0f2e754bb8f7da530179494, type: 3}
+  m_Name: EnemyDeck_Dungeon_03High_01
+  m_EditorClassIdentifier: 
+  enemyArr:
+  - {fileID: 5613242590514579115, guid: 01766837716a18944b0b96d4442aaf2a, type: 3}
+  - {fileID: 5613242590514579115, guid: 0a4e133dc8ec32647a09f810b86cb1e8, type: 3}
+  - {fileID: 5613242590514579115, guid: 0a4e133dc8ec32647a09f810b86cb1e8, type: 3}
+  - {fileID: 5613242590514579115, guid: 01766837716a18944b0b96d4442aaf2a, type: 3}
+  - {fileID: 5613242590514579115, guid: 01766837716a18944b0b96d4442aaf2a, type: 3}

@@ -1,0 +1,383 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d41887b1546f5c44ab54e7e65aad3bc, type: 3}
+  m_Name: Dungeon
+  m_EditorClassIdentifier: 
+  version: 3252
+  resultType: 0
+  materialsAndUVRects:
+  - material: {fileID: 2100000, guid: eaf560748e2d5d0449a30251bc3056be, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.0078125
+      y: 0.015625
+      width: 0.25
+      height: 0.5
+    srcObjName: Dungeon_Wall_Var3
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 0
+  - material: {fileID: 2100000, guid: 88056ad3707bb6346ad6e69bf350d54d, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.0078125
+      y: 0.015625
+      width: 0.25
+      height: 0.5
+    srcObjName: Dungeon_Wall_Var3
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 0
+  - material: {fileID: 2100000, guid: 2cb987137b739894682ccea9106cd69b, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.0078125
+      y: 0.015625
+      width: 0.25
+      height: 0.5
+    srcObjName: Dungeon_Wall_Var3
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 0
+  - material: {fileID: 2100000, guid: 57c5c45402f367749a31d5f99048f829, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.0078125
+      y: 0.015625
+      width: 0.25
+      height: 0.5
+    srcObjName: Dungeon_Wall_Var3
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 0
+  - material: {fileID: 2100000, guid: fa9e8323c39675f459e110ce7b78f7cf, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.0078125
+      y: 0.015625
+      width: 0.25
+      height: 0.5
+    srcObjName: Dungeon_Wall_Var3
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 0
+  - material: {fileID: 2100000, guid: f0999b03096512247a557b9bba30ef43, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.0078125
+      y: 0.015625
+      width: 0.25
+      height: 0.5
+    srcObjName: Dungeon_Wall_Var3
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 0
+  - material: {fileID: 2100000, guid: 2bbbb3d84dce75d4581b151f12702225, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.0078125
+      y: 0.015625
+      width: 0.25
+      height: 0.5
+    srcObjName: Dungeon_Wall_Var3
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 0
+  - material: {fileID: 2100000, guid: 5fabd768dbdf5c941a206f5afecaa38e, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.0078125
+      y: 0.015625
+      width: 0.25
+      height: 0.5
+    srcObjName: Dungeon_Wall_Var3
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 0
+  - material: {fileID: 2100000, guid: a5e122a60536c4e4aa815feffacdfac9, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.0078125
+      y: 0.015625
+      width: 0.25
+      height: 0.5
+    srcObjName: Dungeon_Wall_Var3
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 0
+  - material: {fileID: 2100000, guid: 5b5864ee942879c4298b45498959048c, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.0078125
+      y: 0.015625
+      width: 0.25
+      height: 0.5
+    srcObjName: Dungeon_Wall_Var3
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 0
+  - material: {fileID: 2100000, guid: 608d5ffbcc8ba6d4da4dcc0224fef9ea, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.2734375
+      y: 0.015625
+      width: 0.25
+      height: 0.5
+    srcObjName: Candle_Wall (6)
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 0
+  - material: {fileID: 2100000, guid: c14021abfaa46d1498a6155145915532, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.0078125
+      y: 0.546875
+      width: 0.125
+      height: 0.25
+    srcObjName: Torch_Wall (2)
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 0
+  resultMaterials:
+  - combinedMaterial: {fileID: 2100000, guid: 6948bfbe610fae741865f48b438d6f9f, type: 2}
+    considerMeshUVs: 0
+    sourceMaterials:
+    - {fileID: 2100000, guid: eaf560748e2d5d0449a30251bc3056be, type: 2}
+    - {fileID: 2100000, guid: 88056ad3707bb6346ad6e69bf350d54d, type: 2}
+    - {fileID: 2100000, guid: 2cb987137b739894682ccea9106cd69b, type: 2}
+    - {fileID: 2100000, guid: 57c5c45402f367749a31d5f99048f829, type: 2}
+    - {fileID: 2100000, guid: fa9e8323c39675f459e110ce7b78f7cf, type: 2}
+    - {fileID: 2100000, guid: f0999b03096512247a557b9bba30ef43, type: 2}
+    - {fileID: 2100000, guid: 2bbbb3d84dce75d4581b151f12702225, type: 2}
+    - {fileID: 2100000, guid: 5fabd768dbdf5c941a206f5afecaa38e, type: 2}
+    - {fileID: 2100000, guid: a5e122a60536c4e4aa815feffacdfac9, type: 2}
+    - {fileID: 2100000, guid: 5b5864ee942879c4298b45498959048c, type: 2}
+    - {fileID: 2100000, guid: 608d5ffbcc8ba6d4da4dcc0224fef9ea, type: 2}
+    - {fileID: 2100000, guid: c14021abfaa46d1498a6155145915532, type: 2}
+  resultMaterialsTexArray: []
+  doMultiMaterial: 0
