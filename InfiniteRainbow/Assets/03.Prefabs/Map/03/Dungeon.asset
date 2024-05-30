@@ -189,6 +189,35 @@ MonoBehaviour:
       width: 0
       height: 0
     tilingTreatment: 0
+  - material: {fileID: 2100000, guid: 5b5864ee942879c4298b45498959048c, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.0078125
+      y: 0.015625
+      width: 0.25
+      height: 0.5
+    srcObjName: Dungeon_Wall_Var3
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 0
   - material: {fileID: 2100000, guid: 2bbbb3d84dce75d4581b151f12702225, type: 2}
     atlasRect:
       serializedVersion: 2
@@ -276,35 +305,6 @@ MonoBehaviour:
       width: 0
       height: 0
     tilingTreatment: 0
-  - material: {fileID: 2100000, guid: 5b5864ee942879c4298b45498959048c, type: 2}
-    atlasRect:
-      serializedVersion: 2
-      x: 0.0078125
-      y: 0.015625
-      width: 0.25
-      height: 0.5
-    srcObjName: Dungeon_Wall_Var3
-    textureArraySliceIdx: -1
-    allPropsUseSameTiling: 1
-    allPropsUseSameTiling_sourceMaterialTiling:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 1
-      height: 1
-    allPropsUseSameTiling_samplingEncapsulatinRect:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 1
-      height: 1
-    propsUseDifferntTiling_srcUVsamplingRect:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 0
-      height: 0
-    tilingTreatment: 0
   - material: {fileID: 2100000, guid: 608d5ffbcc8ba6d4da4dcc0224fef9ea, type: 2}
     atlasRect:
       serializedVersion: 2
@@ -312,7 +312,7 @@ MonoBehaviour:
       y: 0.015625
       width: 0.25
       height: 0.5
-    srcObjName: Candle_Wall (6)
+    srcObjName: Candle_Wall (1)
     textureArraySliceIdx: -1
     allPropsUseSameTiling: 1
     allPropsUseSameTiling_sourceMaterialTiling:
@@ -341,7 +341,7 @@ MonoBehaviour:
       y: 0.546875
       width: 0.125
       height: 0.25
-    srcObjName: Torch_Wall (2)
+    srcObjName: Torch_Wall
     textureArraySliceIdx: -1
     allPropsUseSameTiling: 1
     allPropsUseSameTiling_sourceMaterialTiling:
@@ -373,10 +373,10 @@ MonoBehaviour:
     - {fileID: 2100000, guid: 57c5c45402f367749a31d5f99048f829, type: 2}
     - {fileID: 2100000, guid: fa9e8323c39675f459e110ce7b78f7cf, type: 2}
     - {fileID: 2100000, guid: f0999b03096512247a557b9bba30ef43, type: 2}
+    - {fileID: 2100000, guid: 5b5864ee942879c4298b45498959048c, type: 2}
     - {fileID: 2100000, guid: 2bbbb3d84dce75d4581b151f12702225, type: 2}
     - {fileID: 2100000, guid: 5fabd768dbdf5c941a206f5afecaa38e, type: 2}
     - {fileID: 2100000, guid: a5e122a60536c4e4aa815feffacdfac9, type: 2}
-    - {fileID: 2100000, guid: 5b5864ee942879c4298b45498959048c, type: 2}
     - {fileID: 2100000, guid: 608d5ffbcc8ba6d4da4dcc0224fef9ea, type: 2}
     - {fileID: 2100000, guid: c14021abfaa46d1498a6155145915532, type: 2}
   resultMaterialsTexArray: []

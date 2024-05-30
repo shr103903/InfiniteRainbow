@@ -24,23 +24,23 @@ public class DisplayPawnData : MonoBehaviour
     {
         portraitImage.sprite = pawn.pawnSprite;
         CalcStatus(pawn);
-        explainText.text = $"!<´É·ÂÄ¡>\n" +
-                        $"¼Óµµ: {speed}\n" +
+        explainText.text = $"!<ëŠ¥ë ¥ì¹˜>\n" +
+                        $"ì†ë„: {speed}\n" +
                         $"HP: {hp}\n" +
-                        $"°ø°İ·Â: {atk}\n" +
-                        $"¹æ¾î·Â: {def}\n" +
-                        $"È¸ÇÇÀ²: {dodge}%\n" +
-                        $"Ä¡¸íÅ¸ È®·ü: {criChance}%\n" +
-                        $"Ä¡¸íÅ¸ ÇÇÇØ: {criMulti}%\n\n";
+                        $"ê³µê²©ë ¥: {atk}\n" +
+                        $"ë°©ì–´ë ¥: {def}\n" +
+                        $"íšŒí”¼ìœ¨: {dodge}%\n" +
+                        $"ì¹˜ëª…íƒ€ í™•ë¥ : {criChance}%\n" +
+                        $"ì¹˜ëª…íƒ€ í”¼í•´: {criMulti}%\n\n";
         if (pawn.player)
         {
-            explainText.text += $"!<±â¼ú ¹× Æ¯Â¡>\n" +
-                        $"Æ¯Â¡ ¹× ±âº»°ø°İ: {pawn.attackExplain}\n" +
-                        $"ÇÊ»ì±â: {pawn.finisherExplain}";
+            explainText.text += $"!<ê¸°ìˆ  ë° íŠ¹ì§•>\n" +
+                        $"íŠ¹ì§• ë° ê¸°ë³¸ê³µê²©: {pawn.attackExplain}\n" +
+                        $"í•„ì‚´ê¸°: {pawn.finisherExplain}";
         }
         else
         {
-            explainText.text += $"!<±â¼ú ¹× Æ¯Â¡>\n" +
+            explainText.text += $"!<ê¸°ìˆ  ë° íŠ¹ì§•>\n" +
                         $"{pawn.attackExplain}";
         }
     }
@@ -95,9 +95,5 @@ public class DisplayPawnData : MonoBehaviour
             }
 
         }
-
-        print(StatusData.criMultiUpgrade[0]);
-        print(StatusData.criMultiUpgrade[1]);
-        print(StatusData.criMultiUpgrade[2]);
     }
 }

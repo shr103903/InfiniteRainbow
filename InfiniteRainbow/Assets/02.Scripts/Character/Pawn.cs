@@ -133,7 +133,7 @@ public class Pawn : MonoBehaviour
 
     public virtual void StartAction()
     {
-        // »óÅÂÀÌ»ó È®ÀÎ
+        // ìƒíƒœì´ìƒ í™•ì¸
         CheckStatus();
 
         if(freezeCount > 0)
@@ -150,7 +150,7 @@ public class Pawn : MonoBehaviour
             return;
         }
 
-        Debug.Log(gameObject.name + "Çàµ¿ ½ÃÀÛ");
+        Debug.Log(gameObject.name + "í–‰ë™ ì‹œì‘");
         if (player)
         {
             GameManager.instance.battleManager.waitingAction = true;
@@ -172,16 +172,16 @@ public class Pawn : MonoBehaviour
             def = 0;
         }
 
-        // È¸ÇÇ
-        if (random.NextDouble() * 100 < dodge + def * 0.05)
+        // íšŒí”¼
+        if (random.NextDouble() * 100 < dodge + def * 0.05 && player)
         {
-            Debug.Log("È¸ÇÇ ¼º°ø");
+            Debug.Log("íšŒí”¼ ì„±ê³µ");
             return false;
         }
 
-        // µ¥¹ÌÁö ¹æ¾î·Â ¹İ¿µ
+        // ë°ë¯¸ì§€ ë°©ì–´ë ¥ ë°˜ì˜
         float damageResult = damage * (100 - def) * 0.01f;
-        // ³»¼º °ø°İ °¨¼Ò °è»ê
+        // ë‚´ì„± ê³µê²© ê°ì†Œ ê³„ì‚°
         if (physicalAtkResistance > 0 && physicalAtk)
         {
             if(physicalAtkResistance >= 70)
@@ -215,11 +215,11 @@ public class Pawn : MonoBehaviour
 
         if (player)
         {
-            Debug.Log(damageResult + "µ¥ÀÌÁö ÇÇ°İ");
+            Debug.Log(damageResult + "ë°ì´ì§€ í”¼ê²©");
         }
         else
         {
-            Debug.Log(damageResult + "µ¥ÀÌÁö Å¸°İ");
+            Debug.Log(damageResult + "ë°ì´ì§€ íƒ€ê²©");
         }
 
         if (haveShield)
@@ -310,28 +310,28 @@ public class Pawn : MonoBehaviour
         if (buffName.Equals(Buff.Speed))
         {
             speed += (int)percent;
-            Debug.Log(gameObject.name + "¼Óµµ Áõ°¡ ¹öÇÁ");
+            Debug.Log(gameObject.name + "ì†ë„ ì¦ê°€ ë²„í”„");
             GameManager.instance.battleManager.ChangePawnSpeed();
         }
         else if (buffName.Equals(Buff.ATKUp))
         {
             atkUpPercent += percent;
-            Debug.Log(gameObject.name + "°ø°İ·Â Áõ°¡ ¹öÇÁ");
+            Debug.Log(gameObject.name + "ê³µê²©ë ¥ ì¦ê°€ ë²„í”„");
         }
         else if (buffName.Equals(Buff.DEFUp))
         {
             defUpPercent += percent;
-            Debug.Log(gameObject.name + "¹æ¾î·Â Áõ°¡ ¹öÇÁ");
+            Debug.Log(gameObject.name + "ë°©ì–´ë ¥ ì¦ê°€ ë²„í”„");
         }
         else if (buffName.Equals(Buff.CriticalChance))
         {
             criticalChance += percent;
-            Debug.Log(gameObject.name + "Ä¡È® Áõ°¡ ¹öÇÁ");
+            Debug.Log(gameObject.name + "ì¹˜í™• ì¦ê°€ ë²„í”„");
         }
         else if (buffName.Equals(Buff.CriticalMultiplier))
         {
             criticalMultiplier += percent;
-            Debug.Log(gameObject.name + "Ä¡ÇÇ Áõ°¡ ¹öÇÁ");
+            Debug.Log(gameObject.name + "ì¹˜í”¼ ì¦ê°€ ë²„í”„");
         }
     }
 
@@ -343,13 +343,13 @@ public class Pawn : MonoBehaviour
         if (debuffName.Equals(Debuff.Speed))
         {
             speed -= (int)percent;
-            Debug.Log(gameObject.name + "¼Óµµ °¨¼Ò µğ¹öÇÁ");
+            Debug.Log(gameObject.name + "ì†ë„ ê°ì†Œ ë””ë²„í”„");
             GameManager.instance.battleManager.ChangePawnSpeed();
         }
         else if (debuffName.Equals(Debuff.DEFUp))
         {
             defUpPercent -= percent;
-            Debug.Log(gameObject.name + "¹æ¾î·Â °¨¼Ò µğ¹öÇÁ");
+            Debug.Log(gameObject.name + "ë°©ì–´ë ¥ ê°ì†Œ ë””ë²„í”„");
         }
     }
 
@@ -359,28 +359,28 @@ public class Pawn : MonoBehaviour
         if (buffName.Equals(Buff.Speed))
         {
             speed -= (int)percent;
-            Debug.Log(gameObject.name + "¼Óµµ Áõ°¡ ¹öÇÁ »èÁ¦");
+            Debug.Log(gameObject.name + "ì†ë„ ì¦ê°€ ë²„í”„ ì‚­ì œ");
             GameManager.instance.battleManager.ChangePawnSpeed();
         }
         else if (buffName.Equals(Buff.ATKUp))
         {
             atkUpPercent -= percent;
-            Debug.Log(gameObject.name + "°ø°İ·Â Áõ°¡ ¹öÇÁ »èÁ¦");
+            Debug.Log(gameObject.name + "ê³µê²©ë ¥ ì¦ê°€ ë²„í”„ ì‚­ì œ");
         }
         else if (buffName.Equals(Buff.DEFUp))
         {
             defUpPercent -= percent;
-            Debug.Log(gameObject.name + "¹æ¾î·Â Áõ°¡ ¹öÇÁ »èÁ¦");
+            Debug.Log(gameObject.name + "ë°©ì–´ë ¥ ì¦ê°€ ë²„í”„ ì‚­ì œ");
         }
         else if (buffName.Equals(Buff.CriticalChance))
         {
             criticalChance -= percent;
-            Debug.Log(gameObject.name + "Ä¡È® Áõ°¡ ¹öÇÁ »èÁ¦");
+            Debug.Log(gameObject.name + "ì¹˜í™• ì¦ê°€ ë²„í”„ ì‚­ì œ");
         }
         else if (buffName.Equals(Buff.CriticalMultiplier))
         {
             criticalMultiplier -= percent;
-            Debug.Log(gameObject.name + "Ä¡ÇÇ Áõ°¡ ¹öÇÁ »èÁ¦");
+            Debug.Log(gameObject.name + "ì¹˜í”¼ ì¦ê°€ ë²„í”„ ì‚­ì œ");
         }
     }
 
@@ -390,13 +390,13 @@ public class Pawn : MonoBehaviour
         if (debuffName.Equals(Debuff.Speed))
         {
             speed += (int)percent;
-            Debug.Log(gameObject.name + "¼Óµµ °¨¼Ò µğ¹öÇÁ »èÁ¦");
+            Debug.Log(gameObject.name + "ì†ë„ ê°ì†Œ ë””ë²„í”„ ì‚­ì œ");
             GameManager.instance.battleManager.ChangePawnSpeed();
         }
         else if (debuffName.Equals(Debuff.DEFUp))
         {
             defUpPercent += percent;
-            Debug.Log(gameObject.name + "¹æ¾î·Â °¨¼Ò µğ¹öÇÁ »èÁ¦");
+            Debug.Log(gameObject.name + "ë°©ì–´ë ¥ ê°ì†Œ ë””ë²„í”„ ì‚­ì œ");
         }
     }
 
@@ -458,7 +458,7 @@ public class Pawn : MonoBehaviour
                     {
                         if (GameManager.instance.battleManager.enemyPositionDict[index].transform.Equals(targetTr))
                         {
-                            // Áß½É ÀÎµ¦½º ¹İÈ¯
+                            // ì¤‘ì‹¬ ì¸ë±ìŠ¤ ë°˜í™˜
                             middleIndex = index;
                             break;
                         }
@@ -492,7 +492,7 @@ public class Pawn : MonoBehaviour
             return;
         }
 
-        // Çàµ¿ ºÎºĞ
+        // í–‰ë™ ë¶€ë¶„
         prevPos = transform.position;
         Vector3 targetPos = targetPos = new Vector3(GameManager.instance.battleManager.targetList[0].transform.position.x, GameManager.instance.battleManager.targetList[0].transform.position.y,
                 player? GameManager.instance.battleManager.targetList[0].transform.position.z + 1 : GameManager.instance.battleManager.targetList[0].transform.position.z - 1);
@@ -506,8 +506,8 @@ public class Pawn : MonoBehaviour
 
             if (anim == null)
             {
-                //Debug.Log(gameObject.name + " ÀÏ¹İ°ø°İ");
-                // Ä¡¸íÅ¸ È®·ü ¹İ¿µ
+                //Debug.Log(gameObject.name + " ì¼ë°˜ê³µê²©");
+                // ì¹˜ëª…íƒ€ í™•ë¥  ë°˜ì˜
                 float damage = atk * (1.0f + atkUpPercent * 0.01f);
                 if (random.NextDouble() * 100 < criticalChance)
                 {
@@ -532,7 +532,7 @@ public class Pawn : MonoBehaviour
 
     public virtual void AttackEffect()
     {
-        Debug.Log(gameObject.name + " ÀÏ¹İ°ø°İ");
+        Debug.Log(gameObject.name + " ì¼ë°˜ê³µê²©");
         float damage = atk * (1.0f + atkUpPercent * 0.01f);
         if (random.NextDouble() * 100 < criticalChance)
         {
@@ -564,14 +564,14 @@ public class Pawn : MonoBehaviour
         GameManager.instance.battleManager.ActiveAttackButton(false);
         curTurnMark.SetActive(false);
 
-        // °¢ »ó¼ÓµÈ ÇÔ¼ö¿¡¼­ °³ÀÎÀûÀ¸·Î ÇÊ»ì±â µ¹±â
-        // Çàµ¿ ºÎºĞ
+        // ê° ìƒì†ëœ í•¨ìˆ˜ì—ì„œ ê°œì¸ì ìœ¼ë¡œ í•„ì‚´ê¸° ëŒê¸°
+        // í–‰ë™ ë¶€ë¶„
         //Vector3 prevPos = transform.position;
         //Vector3 moveDir = new Vector3(middleTarget.position.x - transform.position.x, 0, middleTarget.position.z - transform.position.z);
         //transform.DOMove(transform.position + moveDir.normalized * (Mathf.Abs(moveDir.magnitude) - 1), 0.5f).OnComplete(() =>
         //{
-        //    Debug.Log(gameObject.name + " ÇÊ»ì±â");
-        //    // Ä¡¸íÅ¸ È®·ü ¹İ¿µ
+        //    Debug.Log(gameObject.name + " í•„ì‚´ê¸°");
+        //    // ì¹˜ëª…íƒ€ í™•ë¥  ë°˜ì˜
         //    float damage = atk;
         //    if (random.NextDouble() * 100 < criticalChance + 20)
         //    {
@@ -603,7 +603,7 @@ public class Pawn : MonoBehaviour
     {
     }
 
-    // ±âº» Å¸°ÙÆÃ (Ã¼·ÂÀÌ Á¦ÀÏ ÀûÀº »óÅÂÆí 1¸í(33%) ¶Ç´Â ¹æ¾î·ÂÀÌ Á¦ÀÏ ³ôÀº »óÅÂÆí 1¸í(66%))
+    // ê¸°ë³¸ íƒ€ê²ŸíŒ… (ì²´ë ¥ì´ ì œì¼ ì ì€ ìƒíƒœí¸ 1ëª…(33%) ë˜ëŠ” ë°©ì–´ë ¥ì´ ì œì¼ ë†’ì€ ìƒíƒœí¸ 1ëª…(66%))
     public virtual void StartTargeting()
     {
         Transform targetTr = null;
@@ -611,7 +611,7 @@ public class Pawn : MonoBehaviour
 
         if (player)
         {
-            // Ã¼·ÂÀÌ Á¦ÀÏ ÀûÀº Àû
+            // ì²´ë ¥ì´ ì œì¼ ì ì€ ì 
             if (rand == 0)
             {
                 float minHp = 10000;
@@ -626,7 +626,7 @@ public class Pawn : MonoBehaviour
                 }
                 targetTr = minHpPawn.transform;
             }
-            // ¹æ¾î·ÂÀÌ Á¦ÀÏ ³ôÀº Àû
+            // ë°©ì–´ë ¥ì´ ì œì¼ ë†’ì€ ì 
             else
             {
                 float maxDef = -10;
@@ -714,14 +714,14 @@ public class Pawn : MonoBehaviour
         }
     }
 
-    // ÇÊ»ì±â Å¸°ÙÆÃ (Ã¼·ÂÀÌ Á¦ÀÏ ÀûÀº »óÅÂÆí 1¸í(33%) ¶Ç´Â ¹æ¾î·ÂÀÌ Á¦ÀÏ ³ôÀº »óÅÂÆí 1¸í(66%))
+    // í•„ì‚´ê¸° íƒ€ê²ŸíŒ… (ì²´ë ¥ì´ ì œì¼ ì ì€ ìƒíƒœí¸ 1ëª…(33%) ë˜ëŠ” ë°©ì–´ë ¥ì´ ì œì¼ ë†’ì€ ìƒíƒœí¸ 1ëª…(66%))
     public virtual void StartFinisherTargeting()
     {
         Transform targetTr = null;
         int rand = random.Next(3);
 
-        // °ø°İ Áß½É¿¡¼­ ¸ÂÀ» ÀûºÎÅÍ Å¸°ÙÆÃ
-        // Ã¼·ÂÀÌ Á¦ÀÏ ÀûÀº Àû
+        // ê³µê²© ì¤‘ì‹¬ì—ì„œ ë§ì„ ì ë¶€í„° íƒ€ê²ŸíŒ…
+        // ì²´ë ¥ì´ ì œì¼ ì ì€ ì 
         if (rand == 0)
         {
             float minHp = 10000;
@@ -736,7 +736,7 @@ public class Pawn : MonoBehaviour
             }
             targetTr = minHpPawn.transform;
         }
-        // ¹æ¾î·ÂÀÌ Á¦ÀÏ ³ôÀº Àû
+        // ë°©ì–´ë ¥ì´ ì œì¼ ë†’ì€ ì 
         else
         {
             float maxDef = -10;
@@ -769,7 +769,7 @@ public class Pawn : MonoBehaviour
             {
                 if (GameManager.instance.battleManager.enemyPositionDict[index].transform.Equals(targetTr))
                 {
-                    // Áß½É ÀÎµ¦½º ¹İÈ¯
+                    // ì¤‘ì‹¬ ì¸ë±ìŠ¤ ë°˜í™˜
                     middleIndex = index;
                     break;
                 }
@@ -872,29 +872,29 @@ public class Pawn : MonoBehaviour
         GameManager.instance.battleManager.AttackButton(false);
     }
 
-    // Çàµ¿ÇÏ´Â ÇÔ¼ö (ÇÁ·ÎÅäÅ¸ÀÔÀº ÀÓÀÇ·Î 1ÃÊ¸¶´Ù Çàµ¿ÇÏ±â ¶§¹®¿¡ ÄÚ·çÆ¾À¸·Î ±¸ÇöÇßÀ½)
+    // í–‰ë™í•˜ëŠ” í•¨ìˆ˜ (í”„ë¡œí† íƒ€ì…ì€ ì„ì˜ë¡œ 1ì´ˆë§ˆë‹¤ í–‰ë™í•˜ê¸° ë•Œë¬¸ì— ì½”ë£¨í‹´ìœ¼ë¡œ êµ¬í˜„í–ˆìŒ)
     protected IEnumerator CorAction()
     {
         //int prevSpeed = speed;
         //GameManager.instance.battleManager.PawnAction(this);
 
-        //// ÀÓÀÇ·Î Çàµ¿ ÈÄ ¼Óµµ -10 ~ +10 º¯È­¸¦ ÁÜ
+        //// ì„ì˜ë¡œ í–‰ë™ í›„ ì†ë„ -10 ~ +10 ë³€í™”ë¥¼ ì¤Œ
         //ChangeSpeed();
-        //Debug.Log(gameObject.name + " Çàµ¿ " + "      ÇöÀç ¼Óµµ: " + prevSpeed + "       Çàµ¿ ÈÄ ¼Óµµ: " + speed);
+        //Debug.Log(gameObject.name + " í–‰ë™ " + "      í˜„ì¬ ì†ë„: " + prevSpeed + "       í–‰ë™ í›„ ì†ë„: " + speed);
         //GameManager.instance.battleManager.ChangePawnSpeed();
 
         //int randNum = 0;
-        //// ÀÓÀÇ·Î »ó´ëÆí ·£´ıÇÑ 1¸íÀÇ hp¸¦ 20 ±ğÀ½
+        //// ì„ì˜ë¡œ ìƒëŒ€í¸ ëœë¤í•œ 1ëª…ì˜ hpë¥¼ 20 ê¹ìŒ
         //if (player)
         //{
         //    randNum = random.Next(GameManager.instance.battleManager.enemyList.Count);
-        //    Debug.Log(gameObject.name + " ====== °ø°İ =====>  " + GameManager.instance.battleManager.enemyList[randNum].gameObject.name);
+        //    Debug.Log(gameObject.name + " ====== ê³µê²© =====>  " + GameManager.instance.battleManager.enemyList[randNum].gameObject.name);
         //    GameManager.instance.battleManager.enemyList[randNum].Hit(20);
         //}
         //else
         //{
         //    randNum = random.Next(random.Next(GameManager.instance.battleManager.playerList.Count));
-        //    Debug.Log(gameObject.name + " ====== °ø°İ =====>  " + GameManager.instance.battleManager.playerList[randNum].gameObject.name);
+        //    Debug.Log(gameObject.name + " ====== ê³µê²© =====>  " + GameManager.instance.battleManager.playerList[randNum].gameObject.name);
         //    GameManager.instance.battleManager.playerList[random.Next(GameManager.instance.battleManager.playerList.Count)].Hit(20);
         //}
 
