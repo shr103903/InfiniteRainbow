@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public BattleManager battleManager = null;
 
+    public JsonUtil saveJsonUtil = null;
+
     public List<GameObject> playerList = new List<GameObject>();
 
     [HideInInspector]
@@ -61,7 +63,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        saveJsonUtil = GetComponent<JsonUtil>();
         FadeInOutUI.instance.StartFadeIn();
+        SoundManager.instance.Play("BGM/Main", Define.Sound.Bgm);
     }
 
     public void StartGame()
@@ -69,6 +73,29 @@ public class GameManager : MonoBehaviour
         StatusData.floor = 0;
         ResetStatus();
         NextGame();
+    }
+
+    public void LoadGame()
+    {
+        if (saveJsonUtil.LoadData())
+        {
+            NextGame();
+        }
+    }
+
+    public void SaveGame()
+    {
+        saveJsonUtil.SaveData();
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void ActiveSoundPanel(bool active)
+    {
+        SoundManager.instance.ActiveSoundPanel(active);
     }
 
     public void NextGame()
@@ -97,9 +124,22 @@ public class GameManager : MonoBehaviour
                 battleManager.difficulty = 2; 
                 battleManager.ActiveMapSelect(false);
                 battleManager.DifficultySelectedAction();
+                SoundManager.instance.Play("BGM/Boss", Define.Sound.Bgm);
                 return;
             }
             battleManager.ActiveMapSelect(false);
+            if (GameManager.instance.mapNum == 0)
+            {
+                SoundManager.instance.Play("BGM/Desert", Define.Sound.Bgm);
+            }
+            else if (GameManager.instance.mapNum == 1)
+            {
+                SoundManager.instance.Play("BGM/Forest", Define.Sound.Bgm);
+            }
+            else
+            {
+                SoundManager.instance.Play("BGM/Dungeon", Define.Sound.Bgm);
+            }
         }
         else
         {

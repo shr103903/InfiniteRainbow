@@ -7,10 +7,10 @@ using Unity.VisualScripting;
 
 public class BattleManager : MonoBehaviour
 {
-    // ¾Æ±º µ¦
+    // ì•„êµ° ë±
     public List<Pawn> playerList = new List<Pawn>();
 
-    // Àû µ¦
+    // ì  ë±
     public List<Pawn> enemyList = new List<Pawn>();
 
     public DeckResult deck = null;
@@ -109,6 +109,8 @@ public class BattleManager : MonoBehaviour
         finishMask.SetActive(true);
         finishCount = 0;
         curActiveAtkBtn = true;
+
+        SoundManager.instance.Stop(Define.Sound.Bgm);
     }
 
     private void Start()
@@ -120,7 +122,7 @@ public class BattleManager : MonoBehaviour
         finisherButton.Active(false);
 
         GameManager.instance.battleManager = this;
-        floorText.text = $"{StatusData.floor + 1}Ãş";
+        floorText.text = $"{StatusData.floor + 1}ì¸µ";
 
         FadeInOutUI.instance.StartFadeIn();
     }
@@ -174,6 +176,7 @@ public class BattleManager : MonoBehaviour
 
     public void MoveNextFloor()
     {
+        GameManager.instance.SaveGame();
         GameManager.instance.NextGame();
     }
 
@@ -216,7 +219,23 @@ public class BattleManager : MonoBehaviour
             StopCoroutine(sceneBuildCor);
         }
         sceneBuildCor = CorStartBattle();
-        StartCoroutine(sceneBuildCor);     
+        StartCoroutine(sceneBuildCor);
+
+        if (StatusData.floor % 5 == 1)
+        {
+            if (GameManager.instance.mapNum == 0)
+            {
+                SoundManager.instance.Play("BGM/Desert", Define.Sound.Bgm);
+            }
+            else if (GameManager.instance.mapNum == 1)
+            {
+                SoundManager.instance.Play("BGM/Forest", Define.Sound.Bgm);
+            }
+            else
+            {
+                SoundManager.instance.Play("BGM/Dungeon", Define.Sound.Bgm);
+            }
+        }
     }
 
     public void AttackButton(bool player = true)
@@ -324,7 +343,7 @@ public class BattleManager : MonoBehaviour
         currentTurnList.Remove(pawn);
     }
 
-    // ¼Óµµ°¡ º¯ÇÑ Æù Á¸Àç
+    // ì†ë„ê°€ ë³€í•œ í° ì¡´ì¬
     public void ChangePawnSpeed()
     {
         List<Pawn> prevTurnList = new List<Pawn>();
@@ -373,18 +392,18 @@ public class BattleManager : MonoBehaviour
         finishCountText.text = $"[HIT {finishCount}/5]";
     }
 
-    // Çàµ¿ Á¾·á
+    // í–‰ë™ ì¢…ë£Œ
     public void FinishAction()
     {
         if(playerList.Count == 0)
         {
-            Debug.Log("ÆĞ¹è");
+            Debug.Log("íŒ¨ë°°");
             GameManager.instance.Defeat();
             return;
         }
         else if (enemyList.Count == 0)
         {
-            Debug.Log("½Â¸®");
+            Debug.Log("ìŠ¹ë¦¬");
             SetSelectStatus();
             if (sceneBuildCor != null)
             {
@@ -400,14 +419,14 @@ public class BattleManager : MonoBehaviour
         if (currentTurnList.Count == 0)
         {
             currentTurnList = nextTurnList.ToList();
-            Debug.Log(round + "¶ó¿îµå Á¾·á");
+            Debug.Log(round + "ë¼ìš´ë“œ ì¢…ë£Œ");
             round++;
         }
 
         currentTurnList[0].StartAction();
     }
 
-    // HP°¡ 0ÀÌÇÏÀÎ Æù Á¸Àç
+    // HPê°€ 0ì´í•˜ì¸ í° ì¡´ì¬
     public void Killed(Pawn pawn)
     {
         if(currentTurnList.Count > 0)
@@ -466,7 +485,7 @@ public class BattleManager : MonoBehaviour
         ChangeTurn(ref list);
     }
 
-    // Çàµ¿ ¼ø¼­ ¾÷µ¥ÀÌÆ®ÇÏ´Â ÇÔ¼ö
+    // í–‰ë™ ìˆœì„œ ì—…ë°ì´íŠ¸í•˜ëŠ” í•¨ìˆ˜
     private void ChangeTurn(ref List<Pawn> pawnList, bool action = false)
     {
         List<Pawn> sortList = new List<Pawn>();
