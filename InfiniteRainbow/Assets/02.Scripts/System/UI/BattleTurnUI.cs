@@ -27,7 +27,7 @@ public class BattleTurnUI : MonoBehaviour
         Init();
     }
 
-    // Æù »ç¸Á
+    // í° ì‚¬ë§
     public void RemoveTurn(Pawn pawn)
     {
         int index = 0;
@@ -53,7 +53,7 @@ public class BattleTurnUI : MonoBehaviour
         turnDict.Remove(turnDict.Count - 1);
     }
 
-    // ¼Óµµ º¯È­
+    // ì†ë„ ë³€í™”
     public void ChangeTurn(ref List<Pawn> prevTurnList, ref List<Pawn> changeTurnList)
     {
         for (int i = 0; i < turnDict.Count; i++)
@@ -62,7 +62,7 @@ public class BattleTurnUI : MonoBehaviour
             {
                 turnDict[i] = changeTurnList[i];
                 blockList[i].SetImage(turnDict[i].pawnSprite);
-                Debug.Log(prevTurnList[i].gameObject.name + " À§Ä¡·Î " + changeTurnList[i].gameObject.name + "ÀÇ ¼ø¼­ º¯°æ");
+                //Debug.Log(prevTurnList[i].gameObject.name + " ìœ„ì¹˜ë¡œ " + changeTurnList[i].gameObject.name + "ì˜ ìˆœì„œ ë³€ê²½");
             }
         }
     }
@@ -89,12 +89,12 @@ public class BattleTurnUI : MonoBehaviour
             {
                 turnDict[i] = prevTurnList[i];
                 blockList[i].SetImage(turnDict[i].pawnSprite);
-                Debug.Log(prevTurnList[i].gameObject.name + " À§Ä¡·Î " + prevTurnList[i].gameObject.name + "ÀÇ ¼ø¼­ º¯°æ");
+                //Debug.Log(prevTurnList[i].gameObject.name + " ìœ„ì¹˜ë¡œ " + prevTurnList[i].gameObject.name + "ì˜ ìˆœì„œ ë³€ê²½");
             }
         }
     }
 
-    // Ã³À½ ºí·° »ç¶óÁö°í ¸¶Áö¸·¿¡ ³ª¿È
+    // ì²˜ìŒ ë¸”ëŸ­ ì‚¬ë¼ì§€ê³  ë§ˆì§€ë§‰ì— ë‚˜ì˜´
     public void FInishTurn(Pawn pawn)
     {
         blockList[0].gameObject.transform.SetAsLastSibling();
