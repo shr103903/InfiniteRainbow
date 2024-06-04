@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Æ¯¼º: ³ôÀº ¹æ¾î·Â
-// ÇÊ»ì±â: ¾Æ±º º¸È£¸· ºÎ¿© ÇÊ»ì±â
-// ´ÜÀÏ Àû Å¸°ÙÆÃ (±âº») / ¾Æ±º 3¸í ¹üÀ§ °ø°İ ÇÊ»ì±â (Ã¼·ÂÀÌ Á¦ÀÏ ÀûÀº ¾Æ±º)
+// íŠ¹ì„±: ë†’ì€ ë°©ì–´ë ¥
+// í•„ì‚´ê¸°: ì•„êµ° ë³´í˜¸ë§‰ ë¶€ì—¬ í•„ì‚´ê¸°
+// ë‹¨ì¼ ì  íƒ€ê²ŸíŒ… (ê¸°ë³¸) / ì•„êµ° 3ëª… ë²”ìœ„ ê³µê²© í•„ì‚´ê¸° (ì²´ë ¥ì´ ì œì¼ ì ì€ ì•„êµ°)
 public class Player_Orange : Player
 {
     private System.Random random = new System.Random();
 
-    //// ÀÏ¹İ °ø°İ (±âº» °ø°İ)
+    //// ì¼ë°˜ ê³µê²© (ê¸°ë³¸ ê³µê²©)
     //public override void Attack()
     //{
     //}
@@ -19,8 +19,8 @@ public class Player_Orange : Player
     {
         Transform targetTr = null;
 
-        // °ø°İ Áß½É¿¡¼­ ¸ÂÀ» ÀûºÎÅÍ Å¸°ÙÆÃ
-        // Ã¼·ÂÀÌ Á¦ÀÏ ÀûÀº Àû
+        // ê³µê²© ì¤‘ì‹¬ì—ì„œ ë§ì„ ì ë¶€í„° íƒ€ê²ŸíŒ…
+        // ì²´ë ¥ì´ ì œì¼ ì ì€ ì 
         float minHp = 10000;
         Pawn minHpPawn = null;
         for (int i = 0; i < GameManager.instance.battleManager.playerList.Count; i++)
@@ -50,7 +50,7 @@ public class Player_Orange : Player
             {
                 if (GameManager.instance.battleManager.playerPositionDict[index].transform.Equals(targetTr))
                 {
-                    // Áß½É ÀÎµ¦½º ¹İÈ¯
+                    // ì¤‘ì‹¬ ì¸ë±ìŠ¤ ë°˜í™˜
                     middleIndex = index;
                     break;
                 }
@@ -91,7 +91,7 @@ public class Player_Orange : Player
                 {
                     if (GameManager.instance.battleManager.playerPositionDict[index].transform.Equals(targetTr))
                     {
-                        // Áß½É ÀÎµ¦½º ¹İÈ¯
+                        // ì¤‘ì‹¬ ì¸ë±ìŠ¤ ë°˜í™˜
                         middleIndex = index;
                         break;
                     }
@@ -112,17 +112,17 @@ public class Player_Orange : Player
         }
     }
 
-    // ¾Æ±º º¸È£¸· ºÎ¿©
+    // ì•„êµ° ë³´í˜¸ë§‰ ë¶€ì—¬
     public override void Finisher()
     {
         base.Finisher();
 
-        // °¢ »ó¼ÓµÈ ÇÔ¼ö¿¡¼­ °³ÀÎÀûÀ¸·Î ÇÊ»ì±â µ¹±â
-        // Çàµ¿ ºÎºĞ
+        // ê° ìƒì†ëœ í•¨ìˆ˜ì—ì„œ ê°œì¸ì ìœ¼ë¡œ í•„ì‚´ê¸° ëŒê¸°
+        // í–‰ë™ ë¶€ë¶„
         prevPos = transform.position;
         transform.DOMove(prevPos, 0.5f).OnComplete(() =>
         {
-            Debug.Log("ÁÖÈ² ÇÊ»ì±â");
+            //Debug.Log("ì£¼í™© í•„ì‚´ê¸°");
             anim.SetBool(animFinisher, true);
         });
     }

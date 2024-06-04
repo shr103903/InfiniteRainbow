@@ -3,16 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Æ¯¼º: Ä¡À¯ È¿°ú º¸À¯
-// ÇÊ»ì±â: ¾Æ±º ÀüÃ¼ Ä¡À¯ ÇÊ»ì±â
-// ¾Æ±º 1¸í Å¸°ÙÆÃ (Ã¼·Â Á¦ÀÏ ÀûÀº ¾Æ±º) / ¾Æ±º ÀüÃ¼ Å¸°ÙÆÃ (¾Æ±º ÀüÃ¼)
+// íŠ¹ì„±: ì¹˜ìœ  íš¨ê³¼ ë³´ìœ 
+// í•„ì‚´ê¸°: ì•„êµ° ì „ì²´ ì¹˜ìœ  í•„ì‚´ê¸°
+// ì•„êµ° 1ëª… íƒ€ê²ŸíŒ… (ì²´ë ¥ ì œì¼ ì ì€ ì•„êµ°) / ì•„êµ° ì „ì²´ íƒ€ê²ŸíŒ… (ì•„êµ° ì „ì²´)
 public class Player_Green : Player
 {
+    [SerializeField]
+    private ParticleSystem[] healEffectPool = new ParticleSystem[4];
+
     public override void StartTargeting()
     {
         Transform targetTr = null;
 
-        // Ã¼·ÂÀÌ Á¦ÀÏ ÀûÀº ¾Æ±º
+        // ì²´ë ¥ì´ ì œì¼ ì ì€ ì•„êµ°
         float minHp = 10000;
         Pawn minHpPawn = null;
         for (int i = 0; i < GameManager.instance.battleManager.playerList.Count; i++)
@@ -86,12 +89,12 @@ public class Player_Green : Player
     {
     }
 
-    // ÀÏ¹İ °ø°İ (¾Æ±º 1¸í Ä¡À¯ È¿°ú)
+    // ì¼ë°˜ ê³µê²© (ì•„êµ° 1ëª… ì¹˜ìœ  íš¨ê³¼)
     public override void Attack()
     {
         base.Attack();
 
-        // Çàµ¿ ºÎºĞ
+        // í–‰ë™ ë¶€ë¶„
         prevPos = transform.position;
         transform.DOMove(prevPos, 0.5f).OnComplete(() =>
         {
@@ -101,11 +104,15 @@ public class Player_Green : Player
 
     public override void AttackEffect()
     {
-        Debug.Log(gameObject.name + " ÀÏ¹İ°ø°İ");
+        //Debug.Log(gameObject.name + " ì¼ë°˜ê³µê²©");
 
+        int index = 0;
         foreach (Pawn pawn in GameManager.instance.battleManager.targetList)
         {
             pawn.Heal(atk * (1.0f + atkUpPercent * 0.01f) * 5.0f);
+            healEffectPool[index].transform.parent.position = pawn.transform.position;
+            healEffectPool[index].Play();
+            index++;
         }
     }
 
@@ -124,26 +131,30 @@ public class Player_Green : Player
         });
     }
 
-    // ¾Æ±º ÀüÃ¼ Ä¡À¯ ÇÊ»ì±â
+    // ì•„êµ° ì „ì²´ ì¹˜ìœ  í•„ì‚´ê¸°
     public override void Finisher()
     {
         base.Finisher();
 
-        // °¢ »ó¼ÓµÈ ÇÔ¼ö¿¡¼­ °³ÀÎÀûÀ¸·Î ÇÊ»ì±â µ¹±â
-        // Çàµ¿ ºÎºĞ
+        // ê° ìƒì†ëœ í•¨ìˆ˜ì—ì„œ ê°œì¸ì ìœ¼ë¡œ í•„ì‚´ê¸° ëŒê¸°
+        // í–‰ë™ ë¶€ë¶„
         prevPos = transform.position;
         transform.DOMove(prevPos, 0.5f).OnComplete(() =>
         {
-            Debug.Log("ÃÊ·Ï ÇÊ»ì±â");
+            //Debug.Log("ì´ˆë¡ í•„ì‚´ê¸°");
             anim.SetBool(animFinisher, true);
         });
     }
 
     public override void FinisherEffect()
     {
+        int index = 0;
         foreach (Pawn pawn in GameManager.instance.battleManager.targetList)
         {
             pawn.Heal(atk * (1.0f + atkUpPercent * 0.01f) * 3.0f);
+            healEffectPool[index].transform.parent.position = pawn.transform.position;
+            healEffectPool[index].Play();
+            index++;
         }
     }
 

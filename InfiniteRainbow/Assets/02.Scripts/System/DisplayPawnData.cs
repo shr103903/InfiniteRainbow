@@ -55,15 +55,7 @@ public class DisplayPawnData : MonoBehaviour
         criMulti = pawn.criticalMultiplier;
         speed = pawn.speed;
 
-        if (!pawn.player)
-        {
-            hp += (StatusData.floor / 5) * 100.0f;
-            atk += (StatusData.floor / 5) * 20.0f;
-            def += (StatusData.floor / 5) * 5.0f;
-            criChance += (StatusData.floor / 5) * 5.0f;
-            criMulti += (StatusData.floor / 5) * 10.0f;
-        }
-        else
+        if (pawn.player)
         {
             for (int i = 0; i < 3; i++)
             {

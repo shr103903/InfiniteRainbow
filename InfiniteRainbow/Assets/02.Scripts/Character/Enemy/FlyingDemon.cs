@@ -23,7 +23,7 @@ public class FlyingDemon : Boss
 
     private System.Random random = new System.Random();
 
-    // Æ¯°ø1, 2
+    // íŠ¹ê³µ1, 2
     protected readonly int animAttack1 = Animator.StringToHash("Attack1");
     protected readonly int animAttack2 = Animator.StringToHash("Attack2");
     protected readonly int animAttack3 = Animator.StringToHash("Attack3");
@@ -50,13 +50,13 @@ public class FlyingDemon : Boss
 
     public override void StartTargeting()
     {
-        // Ã¹ ±¤¿ª°ø°İ Ã¹ ÅÏ¿¡ ¹Ù´Ú¿¡ ºÒ ÀåÆÇÀ» ±ò¾Æ¼­ 3ÅÏ°£ È­»ó µ¥¹ÌÁö¸¦ Áö¼ÓÀûÀ¸·Î ÁÜ
+        // ì²« ê´‘ì—­ê³µê²© ì²« í„´ì— ë°”ë‹¥ì— ë¶ˆ ì¥íŒì„ ê¹”ì•„ì„œ 3í„´ê°„ í™”ìƒ ë°ë¯¸ì§€ë¥¼ ì§€ì†ì ìœ¼ë¡œ ì¤Œ
         if (!firstAttack)
         {
             firstAttack = true;
             attackNum = 3;
         }
-        // Æ¯°ø1 Ã¼·ÂÀÌ 2/3, 1/3ÀÌÇÏÀÏ ¶§ ÇÑ ¹ø¾¿ ºÒ ÀÔ¿¡¼­ ¹ß»çÇÏ´Â ¹üÀ§ °ø°İ(¾Æ±º ÀüÃ¼ ÇÇ°İ)
+        // íŠ¹ê³µ1 ì²´ë ¥ì´ 2/3, 1/3ì´í•˜ì¼ ë•Œ í•œ ë²ˆì”© ë¶ˆ ì…ì—ì„œ ë°œì‚¬í•˜ëŠ” ë²”ìœ„ ê³µê²©(ì•„êµ° ì „ì²´ í”¼ê²©)
         else if (hp <= maxHp * 0.66f && !passPhase1)
         {
             passPhase1 = true;
@@ -67,13 +67,13 @@ public class FlyingDemon : Boss
             passPhase2 = true;
             attackNum = 1;
         }
-        // Æ¯°ø2 Ã¼·ÂÀÌ 20% ÀÌÇÏ°¡ µÇ¸é È¸ÇÇÀ²ÀÌ 20% Áõ°¡ÇÏ´Â ¹öÇÁ °ø°İ
+        // íŠ¹ê³µ2 ì²´ë ¥ì´ 20% ì´í•˜ê°€ ë˜ë©´ íšŒí”¼ìœ¨ì´ 20% ì¦ê°€í•˜ëŠ” ë²„í”„ ê³µê²©
         else if (hp <= maxHp * 0.2f && !buffAttack)
         {
             buffAttack = true;
             attackNum = 2;
         }
-        // ÀÏ¹İ
+        // ì¼ë°˜
         else
         {
             attackNum = 0;
@@ -157,12 +157,12 @@ public class FlyingDemon : Boss
         EnemyAttack();
     }
 
-    // ÀÏ¹İ °ø°İ (Àû 3¸í ¹üÀ§ °ø°İ)
+    // ì¼ë°˜ ê³µê²© (ì  3ëª… ë²”ìœ„ ê³µê²©)
     public override void Attack()
     {
         base.Attack();
 
-        // Çàµ¿ ºÎºĞ
+        // í–‰ë™ ë¶€ë¶„
         prevPos = transform.position;
         Vector3 targetPos = Vector3.zero;
         if (attackNum == 0)
@@ -205,8 +205,7 @@ public class FlyingDemon : Boss
     {
         if (attackNum == 0 || attackNum == 1)
         {
-            Debug.Log(gameObject.name + " °ø°İ");
-            // Ä¡¸íÅ¸ È®·ü ¹İ¿µ
+            // ì¹˜ëª…íƒ€ í™•ë¥  ë°˜ì˜
             float damage = atk * (1.0f + atkUpPercent * 0.01f);
             if (random.NextDouble() * 100 < criticalChance)
             {
@@ -231,8 +230,7 @@ public class FlyingDemon : Boss
         }
         else if (attackNum == 3)
         {
-            Debug.Log(gameObject.name + " °ø°İ");
-            // Ä¡¸íÅ¸ È®·ü ¹İ¿µ
+            // ì¹˜ëª…íƒ€ í™•ë¥  ë°˜ì˜
             float damage = atk * (1.0f + atkUpPercent * 0.01f);
             if (random.NextDouble() * 100 < criticalChance)
             {

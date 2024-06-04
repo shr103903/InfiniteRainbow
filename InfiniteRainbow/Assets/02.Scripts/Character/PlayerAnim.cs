@@ -11,7 +11,13 @@ public class PlayerAnim : MonoBehaviour
     private bool sword01 = false;
 
     [SerializeField]
+    private bool sword02 = false;
+
+    [SerializeField]
     private ParticleSystem swordParticle1 = null;
+
+    [SerializeField]
+    private ParticleSystem swordParticle2 = null;
 
     private void Awake()
     {
@@ -26,6 +32,17 @@ public class PlayerAnim : MonoBehaviour
             if (swordParticle1 != null)
             {
                 swordParticle1.Play();
+            }
+        }
+    }
+
+    public void Sword02()
+    {
+        if (sword02)
+        {
+            if (swordParticle2 != null)
+            {
+                swordParticle2.Play();
             }
         }
     }

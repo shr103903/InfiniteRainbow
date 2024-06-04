@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-// Æ¯¼º: ³ôÀº ¹°¸® °ø°İ·Â ¹× ³ôÀº ¹°¸® ³»¼º
-// ÇÊ»ì±â: Àû 1¸í¿¡°Ô ³ôÀº µ¥¹ÌÁö ºÎ¿© ÇÊ»ì±â
-// Àû 3¸í ¹üÀ§ °ø°İ(°ø°İ·Â 1/3 ºĞ¹èµÊ. ÀÚ¸®¿¡ ¾ø´Â ÀûÀÌ ÀÖ¾îµµ ÀÌÆåÆ®´Â ÀÖ±â¿¡ µ¥¹ÌÁö ºĞÇÒ À¯Áö) (±âº») / ´ÜÀÏ Àû Å¸°ÙÆÃ (Ã¼·ÂÀÌ Á¦ÀÏ ¸¹Àº Àû)
+// íŠ¹ì„±: ë†’ì€ ë¬¼ë¦¬ ê³µê²©ë ¥ ë° ë†’ì€ ë¬¼ë¦¬ ë‚´ì„±
+// í•„ì‚´ê¸°: ì  1ëª…ì—ê²Œ ë†’ì€ ë°ë¯¸ì§€ ë¶€ì—¬ í•„ì‚´ê¸°
+// ì  3ëª… ë²”ìœ„ ê³µê²©(ê³µê²©ë ¥ 1/3 ë¶„ë°°ë¨. ìë¦¬ì— ì—†ëŠ” ì ì´ ìˆì–´ë„ ì´í™íŠ¸ëŠ” ìˆê¸°ì— ë°ë¯¸ì§€ ë¶„í•  ìœ ì§€) (ê¸°ë³¸) / ë‹¨ì¼ ì  íƒ€ê²ŸíŒ… (ì²´ë ¥ì´ ì œì¼ ë§ì€ ì )
 public class Player_Yellow : Player
 {
 
@@ -21,8 +21,8 @@ public class Player_Yellow : Player
     {
         int rand = random.Next(3);
 
-        // °ø°İ Áß½É¿¡¼­ ¸ÂÀ» ÀûºÎÅÍ Å¸°ÙÆÃ
-        // Ã¼·ÂÀÌ Á¦ÀÏ ÀûÀº Àû
+        // ê³µê²© ì¤‘ì‹¬ì—ì„œ ë§ì„ ì ë¶€í„° íƒ€ê²ŸíŒ…
+        // ì²´ë ¥ì´ ì œì¼ ì ì€ ì 
         if (rand == 0)
         {
             float minHp = 10000;
@@ -37,7 +37,7 @@ public class Player_Yellow : Player
             }
             targetTr = minHpPawn.transform;
         }
-        // ¹æ¾î·ÂÀÌ Á¦ÀÏ ³ôÀº Àû
+        // ë°©ì–´ë ¥ì´ ì œì¼ ë†’ì€ ì 
         else
         {
             float maxDef = -10;
@@ -70,7 +70,7 @@ public class Player_Yellow : Player
             {
                 if (GameManager.instance.battleManager.enemyPositionDict[index].transform.Equals(targetTr))
                 {
-                    // Áß½É ÀÎµ¦½º ¹İÈ¯
+                    // ì¤‘ì‹¬ ì¸ë±ìŠ¤ ë°˜í™˜
                     middleIndex = index;
                     break;
                 }
@@ -114,7 +114,7 @@ public class Player_Yellow : Player
             {
                 if (GameManager.instance.battleManager.enemyPositionDict[index].transform.Equals(targetTr))
                 {
-                    // Áß½É ÀÎµ¦½º ¹İÈ¯
+                    // ì¤‘ì‹¬ ì¸ë±ìŠ¤ ë°˜í™˜
                     middleIndex = index;
                     break;
                 }
@@ -193,12 +193,12 @@ public class Player_Yellow : Player
         }
     }
 
-    // ÀÏ¹İ °ø°İ (Àû 3¸í ¹üÀ§ °ø°İ)
+    // ì¼ë°˜ ê³µê²© (ì  3ëª… ë²”ìœ„ ê³µê²©)
     public override void Attack()
     {
         base.Attack();
 
-        // Çàµ¿ ºÎºĞ
+        // í–‰ë™ ë¶€ë¶„
         prevPos = transform.position;
         Vector3 targetPos = new Vector3(targetTr.position.x, targetTr.position.y, targetTr.position.z + 1);
         dist = Vector3.Distance(prevPos, targetPos);
@@ -210,8 +210,8 @@ public class Player_Yellow : Player
 
     public override void AttackEffect()
     {
-        Debug.Log(gameObject.name + " ÀÏ¹İ°ø°İ");
-        // Ä¡¸íÅ¸ È®·ü ¹İ¿µ
+        //Debug.Log(gameObject.name + " ì¼ë°˜ê³µê²©");
+        // ì¹˜ëª…íƒ€ í™•ë¥  ë°˜ì˜
         float damage = atk * (1.0f + atkUpPercent * 0.01f);
         if (random.NextDouble() * 100 < criticalChance)
         {
@@ -239,27 +239,27 @@ public class Player_Yellow : Player
         });
     }
 
-    // Àû 1¸í¿¡°Ô ³ôÀº µ¥¹ÌÁö ºÎ¿© ÇÊ»ì±â
+    // ì  1ëª…ì—ê²Œ ë†’ì€ ë°ë¯¸ì§€ ë¶€ì—¬ í•„ì‚´ê¸°
     public override void Finisher()
     {
         base.Finisher();
 
-        // °¢ »ó¼ÓµÈ ÇÔ¼ö¿¡¼­ °³ÀÎÀûÀ¸·Î ÇÊ»ì±â µ¹±â
-        // Çàµ¿ ºÎºĞ
+        // ê° ìƒì†ëœ í•¨ìˆ˜ì—ì„œ ê°œì¸ì ìœ¼ë¡œ í•„ì‚´ê¸° ëŒê¸°
+        // í–‰ë™ ë¶€ë¶„
         prevPos = transform.position;
         Vector3 targetPos = targetPos = new Vector3(GameManager.instance.battleManager.targetList[0].transform.position.x, GameManager.instance.battleManager.targetList[0].transform.position.y,
                 player ? GameManager.instance.battleManager.targetList[0].transform.position.z + 1 : GameManager.instance.battleManager.targetList[0].transform.position.z - 1);
         dist = Vector3.Distance(prevPos, targetPos);
         transform.DOMove(targetPos, dist * 0.1f).OnComplete(() =>
         {
-            Debug.Log("³ë¶û ÇÊ»ì±â");
+            //Debug.Log("ë…¸ë‘ í•„ì‚´ê¸°");
             anim.SetBool(animFinisher, true);
         });
     }
 
     public override void FinisherEffect()
     {
-        // Ä¡¸íÅ¸ È®·ü ¹İ¿µ
+        // ì¹˜ëª…íƒ€ í™•ë¥  ë°˜ì˜
         float damage = atk * (1.0f + atkUpPercent * 0.01f);
         if (random.NextDouble() * 100 < criticalChance + 20)
         {

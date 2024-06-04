@@ -19,7 +19,7 @@ public class Golem : Boss
 
     private System.Random random = new System.Random();
 
-    // Æ¯°ø1, 2
+    // íŠ¹ê³µ1, 2
     protected readonly int animAttack1 = Animator.StringToHash("Attack1");
     protected readonly int animAttack2 = Animator.StringToHash("Attack2");
     protected readonly int animAttack3 = Animator.StringToHash("Attack3");
@@ -48,25 +48,25 @@ public class Golem : Boss
 
     public override void StartTargeting()
     {
-        // Ã¹ ±¤¿ª°ø°Ý
+        // ì²« ê´‘ì—­ê³µê²©
         if (!firstAttack)
         {
             firstAttack = true;
             attackNum = 3;
         }
-        // Æ¯°ø1
+        // íŠ¹ê³µ1
         else if (hp <= maxHp * 0.5f && !passPhase1)
         {
             passPhase1 = true;
             attackNum = 1;
         }
-        // Æ¯°ø2
+        // íŠ¹ê³µ2
         else if (hp <= maxHp * 0.1f && passPhase1 && !passPhase2)
         {
             passPhase2 = true;
             attackNum = 2;
         }
-        // ÀÏ¹Ý
+        // ì¼ë°˜
         else
         {
             attackNum = 0;
@@ -150,12 +150,12 @@ public class Golem : Boss
         EnemyAttack();
     }
 
-    // ÀÏ¹Ý °ø°Ý (Àû 3¸í ¹üÀ§ °ø°Ý)
+    // ì¼ë°˜ ê³µê²© (ì  3ëª… ë²”ìœ„ ê³µê²©)
     public override void Attack()
     {
         base.Attack();
 
-        // Çàµ¿ ºÎºÐ
+        // í–‰ë™ ë¶€ë¶„
         prevPos = transform.position;
         Vector3 targetPos = Vector3.zero;
         if (attackNum == 0)
@@ -198,8 +198,7 @@ public class Golem : Boss
     {
         if(attackNum == 0)
         {
-            Debug.Log(gameObject.name + " °ø°Ý");
-            // Ä¡¸íÅ¸ È®·ü ¹Ý¿µ
+            // ì¹˜ëª…íƒ€ í™•ë¥  ë°˜ì˜
             float damage = atk * (1.0f + atkUpPercent * 0.01f);
             if (random.NextDouble() * 100 < criticalChance)
             {
@@ -222,12 +221,11 @@ public class Golem : Boss
                 }
             }
         }
-        // 2 ¹öÇÁ°ø°ÝÀº µû·Î °è»ê
-        // Ã¹ ÅÏ ±¤¿ª°ø°Ý
+        // 2 ë²„í”„ê³µê²©ì€ ë”°ë¡œ ê³„ì‚°
+        // ì²« í„´ ê´‘ì—­ê³µê²©
         else if (attackNum == 3)
         {
-            Debug.Log(gameObject.name + " °ø°Ý");
-            // Ä¡¸íÅ¸ È®·ü ¹Ý¿µ
+            // ì¹˜ëª…íƒ€ í™•ë¥  ë°˜ì˜
             float damage = atk * (1.0f + atkUpPercent * 0.01f);
             if (random.NextDouble() * 100 < criticalChance)
             {

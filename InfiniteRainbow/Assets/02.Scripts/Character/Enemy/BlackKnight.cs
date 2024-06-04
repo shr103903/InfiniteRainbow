@@ -21,7 +21,7 @@ public class BlackKnight : Boss
 
     private System.Random random = new System.Random();
 
-    // Æ¯°ø1, 2
+    // íŠ¹ê³µ1, 2
     protected readonly int animAttack1 = Animator.StringToHash("Attack1");
     protected readonly int animAttack2 = Animator.StringToHash("Attack2");
 
@@ -47,13 +47,13 @@ public class BlackKnight : Boss
 
     public override void StartTargeting()
     {
-        // Æ¯°ø1
+        // íŠ¹ê³µ1
         if (hp <= maxHp * 0.66f && !passPhase1)
         {
             passPhase1 = true;
             attackNum = 1;
         }
-        // Æ¯°ø2
+        // íŠ¹ê³µ2
         else if (hp <= maxHp * 0.33f && passPhase1 && !passPhase2)
         {
             passPhase2 = true;
@@ -128,7 +128,7 @@ public class BlackKnight : Boss
                     {
                         if (GameManager.instance.battleManager.playerPositionDict[index].transform.Equals(targetTr))
                         {
-                            // Áß½É ÀÎµ¦½º ¹ÝÈ¯
+                            // ì¤‘ì‹¬ ì¸ë±ìŠ¤ ë°˜í™˜
                             middleIndex = index;
                             break;
                         }
@@ -152,12 +152,12 @@ public class BlackKnight : Boss
         EnemyAttack();
     }
 
-    // ÀÏ¹Ý °ø°Ý (Àû 3¸í ¹üÀ§ °ø°Ý)
+    // ì¼ë°˜ ê³µê²© (ì  3ëª… ë²”ìœ„ ê³µê²©)
     public override void Attack()
     {
         base.Attack();
 
-        // Çàµ¿ ºÎºÐ
+        // í–‰ë™ ë¶€ë¶„
         prevPos = transform.position;
         Vector3 targetPos = new Vector3(targetTr.position.x, targetTr.position.y, targetTr.position.z - 1);
         dist = Vector3.Distance(prevPos, targetPos);
@@ -180,8 +180,7 @@ public class BlackKnight : Boss
 
     public override void AttackEffect()
     {
-        Debug.Log(gameObject.name + " °ø°Ý");
-        // Ä¡¸íÅ¸ È®·ü ¹Ý¿µ
+        // ì¹˜ëª…íƒ€ í™•ë¥  ë°˜ì˜
         float damage = atk * (1.0f + atkUpPercent * 0.01f);
         if (random.NextDouble() * 100 < criticalChance)
         {

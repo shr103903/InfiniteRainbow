@@ -150,7 +150,7 @@ public class Pawn : MonoBehaviour
             return;
         }
 
-        Debug.Log(gameObject.name + "행동 시작");
+        //Debug.Log(gameObject.name + "행동 시작");
         if (player)
         {
             GameManager.instance.battleManager.waitingAction = true;
@@ -175,7 +175,7 @@ public class Pawn : MonoBehaviour
         // 회피
         if (random.NextDouble() * 100 < dodge + def * 0.05 && player)
         {
-            Debug.Log("회피 성공");
+            //Debug.Log("회피 성공");
             return false;
         }
 
@@ -213,14 +213,14 @@ public class Pawn : MonoBehaviour
             GameManager.instance.battleManager.PlayerHit();
         }
 
-        if (player)
-        {
-            Debug.Log(damageResult + "데이지 피격");
-        }
-        else
-        {
-            Debug.Log(damageResult + "데이지 타격");
-        }
+        //if (player)
+        //{
+        //    Debug.Log(damageResult + "데이지 피격");
+        //}
+        //else
+        //{
+        //    Debug.Log(damageResult + "데이지 타격");
+        //}
 
         if (haveShield)
         {
@@ -532,7 +532,7 @@ public class Pawn : MonoBehaviour
 
     public virtual void AttackEffect()
     {
-        Debug.Log(gameObject.name + " 일반공격");
+        //Debug.Log(gameObject.name + " 일반공격");
         float damage = atk * (1.0f + atkUpPercent * 0.01f);
         if (random.NextDouble() * 100 < criticalChance)
         {

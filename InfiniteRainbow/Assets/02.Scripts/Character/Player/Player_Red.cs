@@ -3,38 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Æ¯¼º: ³ôÀº °ø°İ·Â
-// ÇÊ»ì±â: È­»ó »óÅÂÀÌ»ó ºÎ¿©
-// ´ÜÀÏ Àû Å¸°ÙÆÃ (±âº»: Ã¼·ÂÀÌ Á¦ÀÏ ÀûÀº Àû(½Çµå Æ÷ÇÔX)) / Àû 3¸í ¹üÀ§ °ø°İ ÇÊ»ì±â (±âº»)
+// íŠ¹ì„±: ë†’ì€ ê³µê²©ë ¥
+// í•„ì‚´ê¸°: í™”ìƒ ìƒíƒœì´ìƒ ë¶€ì—¬
+// ë‹¨ì¼ ì  íƒ€ê²ŸíŒ… (ê¸°ë³¸: ì²´ë ¥ì´ ì œì¼ ì ì€ ì (ì‹¤ë“œ í¬í•¨X)) / ì  3ëª… ë²”ìœ„ ê³µê²© í•„ì‚´ê¸° (ê¸°ë³¸)
 public class Player_Red : Player
 {
     private System.Random random = new System.Random();
 
-    //// ÀÏ¹İ °ø°İ (±âº» °ø°İ)
+    //// ì¼ë°˜ ê³µê²© (ê¸°ë³¸ ê³µê²©)
     //public override void Attack()
     //{
     //}
 
-    // È­»ó »óÅÂÀÌ»ó ºÎ¿©
+    // í™”ìƒ ìƒíƒœì´ìƒ ë¶€ì—¬
     public override void Finisher()
     {
         base.Finisher();
 
-        // °¢ »ó¼ÓµÈ ÇÔ¼ö¿¡¼­ °³ÀÎÀûÀ¸·Î ÇÊ»ì±â µ¹±â
-        // Çàµ¿ ºÎºĞ
+        // ê° ìƒì†ëœ í•¨ìˆ˜ì—ì„œ ê°œì¸ì ìœ¼ë¡œ í•„ì‚´ê¸° ëŒê¸°
+        // í–‰ë™ ë¶€ë¶„
         prevPos = transform.position;
         Vector3 targetPos = targetPos = new Vector3(middleTarget.position.x, middleTarget.position.y, middleTarget.transform.position.z + 1);
         dist = Vector3.Distance(prevPos, targetPos);
         transform.DOMove(targetPos, dist * 0.1f).OnComplete(() =>
         {
-            Debug.Log("»¡°­ ÇÊ»ì±â");
+            //Debug.Log("ë¹¨ê°• í•„ì‚´ê¸°");
             anim.SetBool(animFinisher, true);
         });
     }
 
     public override void FinisherEffect()
     {
-        // Ä¡¸íÅ¸ È®·ü ¹İ¿µ
+        // ì¹˜ëª…íƒ€ í™•ë¥  ë°˜ì˜
         float damage = atk * (1.0f + atkUpPercent * 0.01f);
         if (random.NextDouble() * 100 < criticalChance + 20)
         {

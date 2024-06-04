@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Æ¯¼º: ¹öÇÁ È¿°ú º¸À¯
-// ÇÊ»ì±â: ¾Æ±º Ä¡¸íÅ¸ ÇÇÇØ Áõ°¡ ¹öÇÁ ÇÊ»ì±â
-// ¾Æ±º 1¸í Å¸°ÙÆÃ (·£´ý ¹öÇÁ(¼Óµµ 2ÅÏ Áõ°¡, °ø°Ý·ÂÁõ°¡ 2ÅÏ, ¹æ¾î·ÂÁõ°¡ 2ÅÏ, Ä¡¸íÅ¸ ÇÇÇØ Áõ°¡ 1ÅÏ µî Áß 1°³) (Ã³À½¿¡´Â ·£´ý ¾Æ±º ÁöÁ¤)) / ¾Æ±º ÀüÃ¼ Å¸°ÙÆÃ (¾Æ±º ÀüÃ¼ Ä¡¸íÅ¸ ÇÇÇØ Áõ°¡ 3ÅÏ)
+// íŠ¹ì„±: ë²„í”„ íš¨ê³¼ ë³´ìœ 
+// í•„ì‚´ê¸°: ì•„êµ° ì¹˜ëª…íƒ€ í”¼í•´ ì¦ê°€ ë²„í”„ í•„ì‚´ê¸°
+// ì•„êµ° 1ëª… íƒ€ê²ŸíŒ… (ëžœë¤ ë²„í”„(ì†ë„ 2í„´ ì¦ê°€, ê³µê²©ë ¥ì¦ê°€ 2í„´, ë°©ì–´ë ¥ì¦ê°€ 2í„´, ì¹˜ëª…íƒ€ í”¼í•´ ì¦ê°€ 1í„´ ë“± ì¤‘ 1ê°œ) (ì²˜ìŒì—ëŠ” ëžœë¤ ì•„êµ° ì§€ì •)) / ì•„êµ° ì „ì²´ íƒ€ê²ŸíŒ… (ì•„êµ° ì „ì²´ ì¹˜ëª…íƒ€ í”¼í•´ ì¦ê°€ 3í„´)
 public class Player_Blue : Player
 {
     private System.Random random = new System.Random();
@@ -15,7 +15,7 @@ public class Player_Blue : Player
         Transform targetTr = null;
         int rand = random.Next(GameManager.instance.battleManager.playerList.Count);
 
-        // ·£´ý ¾Æ±º
+        // ëžœë¤ ì•„êµ°
         targetTr = GameManager.instance.battleManager.playerList[rand].transform;
 
         foreach (Pawn pawn in GameManager.instance.battleManager.enemyList)
@@ -79,12 +79,12 @@ public class Player_Blue : Player
     {
     }
 
-    // ÀÏ¹Ý °ø°Ý (¾Æ±º 1¸í ·£´ý ¹öÇÁ)
+    // ì¼ë°˜ ê³µê²© (ì•„êµ° 1ëª… ëžœë¤ ë²„í”„)
     public override void Attack()
     {
         base.Attack();
 
-        // Çàµ¿ ºÎºÐ
+        // í–‰ë™ ë¶€ë¶„
         prevPos = transform.position;
         transform.DOMove(prevPos, 0.5f).OnComplete(() =>
         {
@@ -94,7 +94,7 @@ public class Player_Blue : Player
 
     public override void AttackEffect()
     {
-        Debug.Log(gameObject.name + " ÀÏ¹Ý°ø°Ý");
+        //Debug.Log(gameObject.name + " ì¼ë°˜ê³µê²©");
 
         int rand = random.Next(4);
         foreach (Pawn pawn in GameManager.instance.battleManager.targetList)
@@ -133,17 +133,17 @@ public class Player_Blue : Player
         });
     }
 
-    // ¾Æ±º Ä¡¸íÅ¸ ÇÇÇØ Áõ°¡ ¹öÇÁ ÇÊ»ì±â
+    // ì•„êµ° ì¹˜ëª…íƒ€ í”¼í•´ ì¦ê°€ ë²„í”„ í•„ì‚´ê¸°
     public override void Finisher()
     {
         base.Finisher();
 
-        // °¢ »ó¼ÓµÈ ÇÔ¼ö¿¡¼­ °³ÀÎÀûÀ¸·Î ÇÊ»ì±â µ¹±â
-        // Çàµ¿ ºÎºÐ
+        // ê° ìƒì†ëœ í•¨ìˆ˜ì—ì„œ ê°œì¸ì ìœ¼ë¡œ í•„ì‚´ê¸° ëŒê¸°
+        // í–‰ë™ ë¶€ë¶„
         prevPos = transform.position;
         transform.DOMove(prevPos, 0.5f).OnComplete(() =>
         {
-            Debug.Log("ÆÄ¶û ÇÊ»ì±â");
+            //Debug.Log("íŒŒëž‘ í•„ì‚´ê¸°");
             anim.SetBool(animFinisher, true);
         });
     }

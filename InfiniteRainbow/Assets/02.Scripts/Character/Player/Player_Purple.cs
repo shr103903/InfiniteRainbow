@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Æ¯¼º: ³ôÀº ¸¶¹ı °ø°İ·Â ¹× ³ôÀº ¸¶¹ı ³»¼º
-// ÇÊ»ì±â: Àû ¼Óµµ °¨¼Ò ¹× ¹æ¾î·Â °¨¼Ò µğ¹öÇÁ ºÎ¿© ÇÊ»ì±â)
-// Àû 3¸í ¹üÀ§ °ø°İ (±âº») / Àû 3¸í ¹üÀ§ Å¸°ÙÆÃ (Å¸°ÙÆÃ ¿Ï·á ÈÄ ¼Óµµ 20 °¨¼Ò 1ÅÏ, ¹æ¾î·Â °¨¼Ò 30% 3ÅÏ) (Ã¼·ÂÀÌ Á¦ÀÏ ¸¹Àº Àû)
+// íŠ¹ì„±: ë†’ì€ ë§ˆë²• ê³µê²©ë ¥ ë° ë†’ì€ ë§ˆë²• ë‚´ì„±
+// í•„ì‚´ê¸°: ì  ì†ë„ ê°ì†Œ ë° ë°©ì–´ë ¥ ê°ì†Œ ë””ë²„í”„ ë¶€ì—¬ í•„ì‚´ê¸°)
+// ì  3ëª… ë²”ìœ„ ê³µê²© (ê¸°ë³¸) / ì  3ëª… ë²”ìœ„ íƒ€ê²ŸíŒ… (íƒ€ê²ŸíŒ… ì™„ë£Œ í›„ ì†ë„ 20 ê°ì†Œ 1í„´, ë°©ì–´ë ¥ ê°ì†Œ 30% 3í„´) (ì²´ë ¥ì´ ì œì¼ ë§ì€ ì )
 public class Player_Purple : Player
 {
     private Transform targetTr = null;
@@ -16,8 +16,8 @@ public class Player_Purple : Player
     {
         int rand = random.Next(3);
 
-        // °ø°İ Áß½É¿¡¼­ ¸ÂÀ» ÀûºÎÅÍ Å¸°ÙÆÃ
-        // Ã¼·ÂÀÌ Á¦ÀÏ ÀûÀº Àû
+        // ê³µê²© ì¤‘ì‹¬ì—ì„œ ë§ì„ ì ë¶€í„° íƒ€ê²ŸíŒ…
+        // ì²´ë ¥ì´ ì œì¼ ì ì€ ì 
         if (rand == 0)
         {
             float minHp = 10000;
@@ -32,7 +32,7 @@ public class Player_Purple : Player
             }
             targetTr = minHpPawn.transform;
         }
-        // ¹æ¾î·ÂÀÌ Á¦ÀÏ ³ôÀº Àû
+        // ë°©ì–´ë ¥ì´ ì œì¼ ë†’ì€ ì 
         else
         {
             float maxDef = -10;
@@ -65,7 +65,7 @@ public class Player_Purple : Player
             {
                 if (GameManager.instance.battleManager.enemyPositionDict[index].transform.Equals(targetTr))
                 {
-                    // Áß½É ÀÎµ¦½º ¹İÈ¯
+                    // ì¤‘ì‹¬ ì¸ë±ìŠ¤ ë°˜í™˜
                     middleIndex = index;
                     break;
                 }
@@ -109,7 +109,7 @@ public class Player_Purple : Player
             {
                 if (GameManager.instance.battleManager.enemyPositionDict[index].transform.Equals(targetTr))
                 {
-                    // Áß½É ÀÎµ¦½º ¹İÈ¯
+                    // ì¤‘ì‹¬ ì¸ë±ìŠ¤ ë°˜í™˜
                     middleIndex = index;
                     break;
                 }
@@ -133,8 +133,8 @@ public class Player_Purple : Player
     {
         Transform targetTr = null;
 
-        // °ø°İ Áß½É¿¡¼­ ¸ÂÀ» ÀûºÎÅÍ Å¸°ÙÆÃ
-        // Ã¼·ÂÀÌ Á¦ÀÏ ¸¹Àº Àû
+        // ê³µê²© ì¤‘ì‹¬ì—ì„œ ë§ì„ ì ë¶€í„° íƒ€ê²ŸíŒ…
+        // ì²´ë ¥ì´ ì œì¼ ë§ì€ ì 
         float maxHp = 0;
         Pawn maxHpPawn = null;
         for (int i = 0; i < GameManager.instance.battleManager.enemyList.Count; i++)
@@ -164,7 +164,7 @@ public class Player_Purple : Player
             {
                 if (GameManager.instance.battleManager.enemyPositionDict[index].transform.Equals(targetTr))
                 {
-                    // Áß½É ÀÎµ¦½º ¹İÈ¯
+                    // ì¤‘ì‹¬ ì¸ë±ìŠ¤ ë°˜í™˜
                     middleIndex = index;
                     break;
                 }
@@ -205,7 +205,7 @@ public class Player_Purple : Player
                 {
                     if (GameManager.instance.battleManager.enemyPositionDict[index].transform.Equals(targetTr))
                     {
-                        // Áß½É ÀÎµ¦½º ¹İÈ¯
+                        // ì¤‘ì‹¬ ì¸ë±ìŠ¤ ë°˜í™˜
                         middleIndex = index;
                         break;
                     }
@@ -226,12 +226,12 @@ public class Player_Purple : Player
         }
     }
 
-    // ÀÏ¹İ °ø°İ (Àû 3¸í ¹üÀ§ °ø°İ)
+    // ì¼ë°˜ ê³µê²© (ì  3ëª… ë²”ìœ„ ê³µê²©)
     public override void Attack()
     {
         base.Attack();
 
-        // Çàµ¿ ºÎºĞ
+        // í–‰ë™ ë¶€ë¶„
         prevPos = transform.position;
         transform.DOMove(prevPos, 0.5f).OnComplete(() =>
         {
@@ -241,8 +241,8 @@ public class Player_Purple : Player
 
     public override void AttackEffect()
     {
-        Debug.Log(gameObject.name + " ÀÏ¹İ°ø°İ");
-        // Ä¡¸íÅ¸ È®·ü ¹İ¿µ
+        //Debug.Log(gameObject.name + " ì¼ë°˜ê³µê²©");
+        // ì¹˜ëª…íƒ€ í™•ë¥  ë°˜ì˜
         float damage = atk * (1.0f + atkUpPercent * 0.01f);
         if (random.NextDouble() * 100 < criticalChance)
         {
@@ -270,17 +270,17 @@ public class Player_Purple : Player
         });
     }
 
-    // Àû ¼Óµµ °¨¼Ò ¹× ¹æ¾î·Â °¨¼Ò µğ¹öÇÁ ºÎ¿©
+    // ì  ì†ë„ ê°ì†Œ ë° ë°©ì–´ë ¥ ê°ì†Œ ë””ë²„í”„ ë¶€ì—¬
     public override void Finisher()
     {
         base.Finisher();
 
-        // °¢ »ó¼ÓµÈ ÇÔ¼ö¿¡¼­ °³ÀÎÀûÀ¸·Î ÇÊ»ì±â µ¹±â
-        // Çàµ¿ ºÎºĞ
+        // ê° ìƒì†ëœ í•¨ìˆ˜ì—ì„œ ê°œì¸ì ìœ¼ë¡œ í•„ì‚´ê¸° ëŒê¸°
+        // í–‰ë™ ë¶€ë¶„
         prevPos = transform.position;
         transform.DOMove(prevPos, 0.5f).OnComplete(() =>
         {
-            Debug.Log("º¸¶ó ÇÊ»ì±â");
+            //Debug.Log("ë³´ë¼ í•„ì‚´ê¸°");
             anim.SetBool(animFinisher, true);
         });
     }
