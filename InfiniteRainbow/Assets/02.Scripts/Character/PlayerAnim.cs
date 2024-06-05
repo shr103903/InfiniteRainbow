@@ -47,6 +47,11 @@ public class PlayerAnim : MonoBehaviour
         }
     }
 
+    public void HitSound()
+    {
+        pawn.HitSound();
+    }
+
     public void AttackEffect()
     {
         pawn.AttackEffect();

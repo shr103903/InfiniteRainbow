@@ -499,34 +499,7 @@ public class Pawn : MonoBehaviour
         dist = Vector3.Distance(prevPos, targetPos);
         transform.DOMove(targetPos, dist * 0.1f).OnComplete(() =>
         {
-            if (anim != null)
-            {
-                anim.SetBool(animAttack, true);
-            }
-
-            if (anim == null)
-            {
-                //Debug.Log(gameObject.name + " 일반공격");
-                // 치명타 확률 반영
-                float damage = atk * (1.0f + atkUpPercent * 0.01f);
-                if (random.NextDouble() * 100 < criticalChance)
-                {
-                    damage = damage * (1.0f + criticalMultiplier / 100.0f);
-                }
-
-                GameManager.instance.battleManager.targetList[0].Hit(damage, physicsAtk);
-
-
-                transform.DOMove(prevPos, dist * 0.2f).OnComplete(() =>
-                {
-                    if (actionCor != null)
-                    {
-                        StopCoroutine(actionCor);
-                    }
-                    actionCor = CorAction();
-                    StartCoroutine(actionCor);
-                });
-            }
+            anim.SetBool(animAttack, true);
         });
     }
 
@@ -819,6 +792,24 @@ public class Pawn : MonoBehaviour
                 hpPanel.Freeze(false);
             }
         }
+    }
+
+    public void HitSound()
+    {
+        SoundManager.instance.Play("Effect/Hit01", Define.Sound.Effect);
+        //int rand = random.Next(3);
+        //if (rand == 0)
+        //{
+        //    SoundManager.instance.Play("Effect/Hit01", Define.Sound.Effect);
+        //}
+        //else if (rand == 1)
+        //{
+        //    SoundManager.instance.Play("Effect/Hit02", Define.Sound.Effect);
+        //}
+        //else 
+        //{
+        //    SoundManager.instance.Play("Effect/Hit03", Define.Sound.Effect);
+        //}
     }
 
     protected void CheckBuff()
