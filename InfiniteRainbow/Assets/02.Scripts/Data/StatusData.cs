@@ -12,6 +12,8 @@ public static class StatusData
 
     public static void SetData()
     {
+        floor = 0;
+
         hpUpgrade = new int[] { 0, 0, 0 };
         atkUpgrade = new int[] { 0, 0, 0 };
         defUpgrade = new int[] { 0, 0, 0 };
@@ -19,6 +21,8 @@ public static class StatusData
         criChanceUpgrade = new int[] { 0, 0, 0 };
         criMultiUpgrade = new int[] { 0, 0, 0 };
         speedUpgrade = new int[] { 0, 0, 0 };
+
+        GameManager.instance.SaveGame();
     }
 
     public static void SaveData()

@@ -516,7 +516,6 @@ public class BattleManager : MonoBehaviour
         if (currentTurnList.Count == 0)
         {
             currentTurnList = nextTurnList.ToList();
-            Debug.Log(round + "라운드 종료");
             round++;
         }
 

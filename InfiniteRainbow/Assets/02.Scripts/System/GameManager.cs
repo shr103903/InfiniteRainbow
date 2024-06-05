@@ -70,7 +70,6 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        StatusData.floor = 0;
         ResetStatus();
         NextGame();
     }
