@@ -20,7 +20,7 @@ public class JsonData
 
 public class JsonUtil : MonoBehaviour
 {
-    public void SaveData()
+    public bool SaveData()
     {
         JsonData data = new JsonData();
         data.floor = StatusData.floor;
@@ -61,12 +61,20 @@ public class JsonUtil : MonoBehaviour
         }
 
         string toJson = JsonUtility.ToJson(data);
-        if (!Directory.Exists(Application.persistentDataPath + "/Saved"))
+        try
         {
-            Directory.CreateDirectory(Application.persistentDataPath + "/Saved");
+            if (!Directory.Exists(Application.persistentDataPath + "/Saved"))
+            {
+                Directory.CreateDirectory(Application.persistentDataPath + "/Saved");
+            }
+            string path = Path.Combine(Application.persistentDataPath + "/Saved/", "savedData.json");
+            File.WriteAllText(path, toJson);
+            return true;
         }
-        string path = Path.Combine(Application.persistentDataPath + "/Saved/", "savedData.json");
-        File.WriteAllText(path, toJson);
+        catch
+        {
+            return false;
+        }
     }
 
     public bool LoadData()

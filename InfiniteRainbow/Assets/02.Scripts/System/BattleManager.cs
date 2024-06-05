@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
+using DG.Tweening;
 
 public class BattleManager : MonoBehaviour
 {
@@ -48,6 +48,18 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField]
     private GameObject selectDeckPanel = null;
+
+    [SerializeField]
+    private GameObject optionCanvas = null;
+
+    [SerializeField]
+    private GameObject quitWarningPanel = null;
+
+    [SerializeField]
+    private GameObject saveToastPanel = null;
+
+    [SerializeField]
+    private TMP_Text saveToastText = null;
 
     [SerializeField]
     private List<StatusSelectButton> statusButtonList = new List<StatusSelectButton>(); 
@@ -99,6 +111,8 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator sceneBuildCor = null;
 
+    private IEnumerator toastCor = null;
+
     private WaitForSeconds second = new WaitForSeconds(1.0f);
 
     private System.Random random = new System.Random();
@@ -129,6 +143,17 @@ public class BattleManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (optionCanvas.activeSelf)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                OpenOption();
+            }
+        }
         if (Input.GetKeyDown(KeyCode.G))
         {
             SetSelectStatus();
@@ -167,6 +192,78 @@ public class BattleManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OpenOption()
+    {
+        optionCanvas.SetActive(true);
+        if (toastCor != null)
+        {
+            StopCoroutine(toastCor);
+        }
+        if (saveToastPanel.activeSelf)
+        {
+            saveToastPanel.SetActive(false);
+        }
+        Time.timeScale = 0.0f;
+    }
+
+    public void ResumeGame()
+    {
+        optionCanvas.SetActive(false);
+        SoundManager.instance.ActiveSoundPanel(false);
+        if (quitWarningPanel.activeSelf)
+        {
+            quitWarningPanel.SetActive(false);
+        }
+        Time.timeScale = 1.0f;
+    }
+
+    public void SaveGame()
+    {
+        if (GameManager.instance.SaveGame())
+        {
+            saveToastText.text = $"저장 완료";
+        }
+        else
+        {
+            saveToastText.text = $"저장 실패";
+        }
+
+        if(toastCor != null)
+        {
+            StopCoroutine(toastCor);
+        }
+        toastCor = CorToast();
+        StartCoroutine(toastCor);
+    }
+
+    private IEnumerator CorToast()
+    {
+        saveToastPanel.SetActive(true);
+        yield return new WaitForSecondsRealtime(1.0f);
+        saveToastPanel.SetActive(false);
+        StopCoroutine(toastCor);
+    }
+
+    public void OpenSoundPanel()
+    {
+        SoundManager.instance.ActiveSoundPanel(true);
+    }
+
+    public void QuitGameButton()
+    {
+        quitWarningPanel.SetActive(true);
+    }
+
+    public void QuitYes()
+    {
+        Application.Quit();
+    }
+
+    public void QuitNo()
+    {
+        quitWarningPanel.SetActive(false);
     }
 
     public void DisplayPawnData(Pawn pawn)

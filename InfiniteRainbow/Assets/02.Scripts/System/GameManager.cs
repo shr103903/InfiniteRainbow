@@ -83,9 +83,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SaveGame()
+    public bool SaveGame()
     {
-        saveJsonUtil.SaveData();
+        return saveJsonUtil.SaveData();
     }
 
     public void Quit()
