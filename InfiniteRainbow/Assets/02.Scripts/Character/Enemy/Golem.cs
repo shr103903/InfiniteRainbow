@@ -5,6 +5,15 @@ using UnityEngine;
 
 public class Golem : Boss
 {
+    [SerializeField]
+    private ParticleSystem attackParticle = null;
+
+    [SerializeField]
+    private ParticleSystem absorberParticle = null;
+
+    [SerializeField]
+    private ParticleSystem groundParticle = null;
+
     private Transform targetTr = null;
 
     private float originDef = 0;
@@ -39,6 +48,7 @@ public class Golem : Boss
         if (passPhase2)
         {
             damage = damage * 0.8f;
+            absorberParticle.Play();
         }
         base.Hit(damage, physicalAtk, statusDamage);
 
@@ -74,11 +84,11 @@ public class Golem : Boss
 
         targetTr = null;
 
-        if (attackNum == 3 || attackNum == 1)
+        if (attackNum == 3)
         {
             targetTr = GameManager.instance.battleManager.positionParent.playerMiddlePos;
         }
-        else if (attackNum == 2)
+        else if (attackNum == 1 || attackNum == 2)
         {
             targetTr = transform.transform;
         }
@@ -158,21 +168,17 @@ public class Golem : Boss
         // 행동 부분
         prevPos = transform.position;
         Vector3 targetPos = Vector3.zero;
-        if (attackNum == 0)
-        {
-            targetPos = new Vector3(targetTr.position.x, targetTr.position.y, targetTr.position.z - 1);
-            dist = 5.0f;
-        }
-        else if (attackNum == 1 || attackNum == 3)
+        if (attackNum == 3)
         {
             targetPos = new Vector3(targetTr.position.x, targetTr.position.y, targetTr.position.z - 1);
             dist = Vector3.Distance(prevPos, targetPos);
         }
-        else if (attackNum == 2)
+        else 
         {
             targetPos = transform.position;
             dist = 5.0f;
         }
+
         transform.DOMove(targetPos, dist * 0.1f).OnComplete(() =>
         {
             if (attackNum == 0)
@@ -208,6 +214,8 @@ public class Golem : Boss
             foreach (Pawn pawn in GameManager.instance.battleManager.targetList)
             {
                 pawn.Hit(damage, physicsAtk);
+                attackParticle.transform.parent.position = pawn.transform.position;
+                attackParticle.Play();
             }
         }
         else if (attackNum == 1)
@@ -219,7 +227,12 @@ public class Golem : Boss
                 {
                     pawn.def = 0;
                 }
+                pawn.PlayDebuffEffect();
             }
+        }
+        else if (attackNum == 2)
+        {
+            PlayBuffEffect();
         }
         // 2 버프공격은 따로 계산
         // 첫 턴 광역공격
@@ -232,9 +245,10 @@ public class Golem : Boss
                 damage = damage * (1.0f + criticalMultiplier / 100.0f);
             }
 
-            foreach (Pawn pawn in GameManager.instance.battleManager.targetList)
+            groundParticle.Play();
+            foreach (Pawn pawn in GameManager.instance.battleManager.playerList)
             {
-                pawn.Hit(damage * 3.0f, physicsAtk);
+                pawn.Hit(damage * 1.2f, physicsAtk);
             }
         }
     }

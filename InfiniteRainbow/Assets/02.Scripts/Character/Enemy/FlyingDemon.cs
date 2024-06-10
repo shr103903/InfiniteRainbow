@@ -5,7 +5,14 @@ using UnityEngine;
 
 public class FlyingDemon : Boss
 {
-    private Transform targetTr = null;
+    [SerializeField]
+    private ParticleSystem fireWallParticle = null;
+
+    [SerializeField]
+    private ParticleSystem buffParticle = null;
+
+    [HideInInspector]
+    public Transform targetTr = null;
 
     private float originAtk = 0;
 
@@ -81,11 +88,11 @@ public class FlyingDemon : Boss
 
         targetTr = null;
 
-        if (attackNum == 1)
+        if (attackNum == 1 || attackNum == 3)
         {
             targetTr = GameManager.instance.battleManager.positionParent.playerMiddlePos;
         }
-        else if (attackNum == 2 || attackNum == 3)
+        else if (attackNum == 2)
         {
             targetTr = transform.transform;
         }
@@ -165,21 +172,9 @@ public class FlyingDemon : Boss
         // 행동 부분
         prevPos = transform.position;
         Vector3 targetPos = Vector3.zero;
-        if (attackNum == 0)
-        {
-            targetPos = new Vector3(targetTr.position.x, targetTr.position.y, targetTr.position.z - 1);
-            dist = 5.0f;
-        }
-        else if (attackNum == 1)
-        {
-            targetPos = new Vector3(targetTr.position.x, targetTr.position.y, targetTr.position.z - 1);
-            dist = Vector3.Distance(prevPos, targetPos);
-        }
-        else if (attackNum == 2 || attackNum == 3)
-        {
-            targetPos = transform.position;
-            dist = 5.0f;
-        }
+        targetPos = transform.position;
+        dist = 5.0f;
+
         transform.DOMove(targetPos, dist * 0.1f).OnComplete(() =>
         {
             if (attackNum == 0)
@@ -203,7 +198,7 @@ public class FlyingDemon : Boss
 
     public override void AttackEffect()
     {
-        if (attackNum == 0 || attackNum == 1)
+        if (attackNum == 0)
         {
             // 치명타 확률 반영
             float damage = atk * (1.0f + atkUpPercent * 0.01f);
@@ -226,7 +221,30 @@ public class FlyingDemon : Boss
         }
         else if (attackNum == 2)
         {
-            this.dodge *= 1.2f;
+            this.dodge *= 2.0f;
+            buffParticle.Play();
+            PlayBuffEffect();
+        }
+        else if (attackNum == 1)
+        {
+            // 치명타 확률 반영
+            float damage = atk * (1.0f + atkUpPercent * 0.01f);
+            if (random.NextDouble() * 100 < criticalChance)
+            {
+                damage = damage * (1.0f + criticalMultiplier / 100.0f);
+            }
+
+            int rand = random.Next(100);
+            foreach (Pawn pawn in GameManager.instance.battleManager.playerList)
+            {
+                if (pawn.Hit(damage * 0.6f, physicsAtk))
+                {
+                    if (rand < 50)
+                    {
+                        pawn.Burn();
+                    }
+                }
+            }
         }
         else if (attackNum == 3)
         {
@@ -237,9 +255,11 @@ public class FlyingDemon : Boss
                 damage = damage * (1.0f + criticalMultiplier / 100.0f);
             }
 
-            foreach (Pawn pawn in GameManager.instance.battleManager.targetList)
+            fireWallParticle.transform.parent.position = targetTr.position;
+            fireWallParticle.Play();
+            foreach (Pawn pawn in GameManager.instance.battleManager.playerList)
             {
-                if (pawn.Hit(damage * 0.25f, physicsAtk))
+                if (pawn.Hit(damage * 0.5f, physicsAtk))
                 {
                     pawn.Burn();
                 }

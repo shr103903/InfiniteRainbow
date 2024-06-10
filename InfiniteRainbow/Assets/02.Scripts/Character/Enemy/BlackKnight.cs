@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class BlackKnight : Boss
 {
+    [SerializeField]
+    private List<ParticleSystem> auraEffectList = new List<ParticleSystem>();
+
+    [SerializeField]
+    private ParticleSystem groundHitParticle = null;
+
     private Transform targetTr = null;
 
     private int hitTurn = 0;
@@ -39,6 +45,20 @@ public class BlackKnight : Boss
     public override bool Hit(float damage, bool physicalAtk, bool statusDamage = false)
     {
         hitTurn = (hitTurn + 1) % 4;
+        for(int i = 0; i < 3; i++)
+        {
+            if (i == hitTurn - 1)
+            {
+                auraEffectList[i].Play();
+            }
+            else
+            {
+                if (auraEffectList[i].isPlaying)
+                {
+                    auraEffectList[i].Stop();
+                }
+            }
+        }
         atk = originAtk * (1.0f + 0.1f * hitTurn);
         def = originDef * (1.0f - 0.1f * hitTurn);
         base.Hit(damage, physicalAtk, statusDamage);
@@ -180,8 +200,22 @@ public class BlackKnight : Boss
 
     public override void AttackEffect()
     {
+        if(attackNum == 2)
+        {
+            groundHitParticle.Play();
+        }
+
         // 치명타 확률 반영
         float damage = atk * (1.0f + atkUpPercent * 0.01f);
+        if (attackNum == 1)
+        {
+            damage *= 2.0f;
+        }
+        else if (attackNum == 2)
+        {
+            damage *= 1.5f;
+        }
+
         if (random.NextDouble() * 100 < criticalChance)
         {
             damage = damage * (1.0f + criticalMultiplier / 100.0f);

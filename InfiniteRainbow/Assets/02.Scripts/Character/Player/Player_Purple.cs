@@ -10,6 +10,9 @@ public class Player_Purple : Player
 {
     private Transform targetTr = null;
 
+    [SerializeField]
+    private ParticleSystem[] magicEffectPool = new ParticleSystem[5];
+
     private System.Random random = new System.Random();
 
     public override void StartTargeting()
@@ -249,9 +252,13 @@ public class Player_Purple : Player
             damage = damage * (1.0f + criticalMultiplier / 100.0f);
         }
 
+        int index = 0;
         foreach (Pawn pawn in GameManager.instance.battleManager.targetList)
         {
             pawn.Hit(damage * 0.5f, physicsAtk);
+            magicEffectPool[index].transform.parent.position = pawn.transform.position;
+            magicEffectPool[index].Play();
+            index++;
         }
     }
 
