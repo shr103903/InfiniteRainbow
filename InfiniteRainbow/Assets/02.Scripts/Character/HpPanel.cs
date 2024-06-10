@@ -10,6 +10,9 @@ public class HpPanel : MonoBehaviour
     public Image shieldHpImage = null;
 
     [SerializeField]
+    private Image backImage = null;
+
+    [SerializeField]
     private GameObject burnStatusImg = null;
 
     [SerializeField]
@@ -29,11 +32,24 @@ public class HpPanel : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
+    public void ChangeBackColor(Color color)
+    {
+        backImage.color = color;
+    }
+
     public void Burn(bool active)
     {
         if(burnStatusImg.activeSelf != active)
         {
-            burnStatusImg.SetActive(active);
+            burnStatusImg.SetActive(active);    
+        }
+        if (active)
+        {
+            pawn.burnEfect.Play();
+        }
+        else
+        {
+            pawn.burnEfect.Stop();
         }
     }
 
@@ -42,6 +58,14 @@ public class HpPanel : MonoBehaviour
         if (freezeStatusImg.activeSelf != active)
         {
             freezeStatusImg.SetActive(active);
+        }
+        if (active)
+        {
+            pawn.freezeEfect.Play();
+        }
+        else
+        {
+            pawn.freezeEfect.Stop();
         }
     }
 }
