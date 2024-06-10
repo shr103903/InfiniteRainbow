@@ -15,25 +15,25 @@ public class StatusSelectButton : MonoBehaviour
         switch (num)
         {
             case 0:
-                text.text = $"Ã¼·Â\n{50 + 20 * GameManager.instance.battleManager.difficulty} Áõ°¡";
+                text.text = $"ì²´ë ¥\n{50 + 20 * GameManager.instance.battleManager.difficulty} ì¦ê°€";
                 break;
             case 1:
-                text.text = $"°ø°İ·Â\n{10 + 2 * GameManager.instance.battleManager.difficulty} Áõ°¡";
+                text.text = $"ê³µê²©ë ¥\n{10 + 2 * GameManager.instance.battleManager.difficulty} ì¦ê°€";
                 break;
             case 2:
-                text.text = $"¹æ¾î·Â\n{3 + 1 * GameManager.instance.battleManager.difficulty} Áõ°¡";
+                text.text = $"ë°©ì–´ë ¥\n{3 + 1 * GameManager.instance.battleManager.difficulty} ì¦ê°€";
                 break;
             case 3:
-                text.text = $"È¸ÇÇÀ²\n{3 + 1 * GameManager.instance.battleManager.difficulty}% Áõ°¡";
+                text.text = $"íšŒí”¼ìœ¨\n{3 + 1 * GameManager.instance.battleManager.difficulty}% ì¦ê°€";
                 break;
             case 4:
-                text.text = $"Ä¡¸íÅ¸ È®·ü\n{4 + 1 * GameManager.instance.battleManager.difficulty}% Áõ°¡";
+                text.text = $"ì¹˜ëª…íƒ€ í™•ë¥ \n{4 + 1 * GameManager.instance.battleManager.difficulty}% ì¦ê°€";
                 break;
             case 5:
-                text.text = $"Ä¡¸íÅ¸ ÇÇÇØ\n{8 + 2 * GameManager.instance.battleManager.difficulty}% Áõ°¡";
+                text.text = $"ì¹˜ëª…íƒ€ í”¼í•´\n{8 + 2 * GameManager.instance.battleManager.difficulty}% ì¦ê°€";
                 break;
             case 6:
-                text.text = $"¼Óµµ\n{2 + 1 * GameManager.instance.battleManager.difficulty} Áõ°¡";
+                text.text = $"ì†ë„\n{2 + 1 * GameManager.instance.battleManager.difficulty} ì¦ê°€";
                 break;
             default:
                 text.text = $"";
@@ -45,5 +45,6 @@ public class StatusSelectButton : MonoBehaviour
     {
         GameManager.instance.UpgradeStatus(num);
         GameManager.instance.battleManager.MoveNextFloor();
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
     }
 }

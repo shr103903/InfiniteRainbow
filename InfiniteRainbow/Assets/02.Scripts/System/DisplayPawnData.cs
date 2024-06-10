@@ -41,7 +41,7 @@ public class DisplayPawnData : MonoBehaviour
         else
         {
             explainText.text += $"!<기술 및 특징>\n" +
-                        $"{pawn.attackExplain}";
+                        $"{(pawn.attackExplain).Replace("???", "\n")}";
         }
     }
 

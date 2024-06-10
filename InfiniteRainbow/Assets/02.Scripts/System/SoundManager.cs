@@ -60,7 +60,17 @@ public class SoundManager : MonoBehaviour
 	private AudioSource[] audioSources = new AudioSource[(int)Define.Sound.MaxCount];
 	private Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 
-	public void Init()
+    private void Start()
+    {
+		MasterSoundVolume(masterValue);
+		BGMSoundVolume(bgmValue);
+		EffectSoundVolume(effectValue);
+		UISoundVolume(uiValue);
+
+		SetSoundValueImage();
+	}
+
+    public void Init()
 	{
 		GameObject root = GameObject.Find("@Sound");
 		if (root == null)
@@ -116,13 +126,6 @@ public class SoundManager : MonoBehaviour
 		{
 			uiValue = 0.5f;
 		}
-
-		MasterSoundVolume(masterValue);
-		BGMSoundVolume(bgmValue);
-		EffectSoundVolume(effectValue);
-		UISoundVolume(uiValue);
-
-		SetSoundValueImage();
 	}
 
 	public void ActiveSoundPanel(bool active)
@@ -131,6 +134,7 @@ public class SoundManager : MonoBehaviour
         {
 			soundPanel.SetActive(active);
         }
+		SoundManager.instance.Play("UI/Button", Define.Sound.UI);
 	}
 
 	public void Pause(Define.Sound type = Define.Sound.Bgm)
@@ -141,11 +145,15 @@ public class SoundManager : MonoBehaviour
 			audioSources[(int)Define.Sound.Bgm].Pause();
 		}
 		//effect
-		else
+		else if (type == Define.Sound.Effect)
 		{
 			audioSources[(int)Define.Sound.Effect].Pause();
 		}
-
+		//ui
+		else
+		{
+			audioSources[(int)Define.Sound.UI].Pause();
+		}
 	}
 
 	public void Stop(Define.Sound type = Define.Sound.Bgm)
@@ -154,11 +162,16 @@ public class SoundManager : MonoBehaviour
 		{
 			audioSources[(int)Define.Sound.Bgm].Stop();
 		}
-		else
+		//effect
+		else if (type == Define.Sound.Effect)
 		{
 			audioSources[(int)Define.Sound.Effect].Stop();
 		}
-
+		//ui
+		else
+		{
+			audioSources[(int)Define.Sound.UI].Stop();
+		}
 	}
 
 	public void RePlay(Define.Sound type = Define.Sound.Bgm)
@@ -167,9 +180,15 @@ public class SoundManager : MonoBehaviour
 		{
 			audioSources[(int)Define.Sound.Bgm].Play();
 		}
-		else
+		//effect
+		else if (type == Define.Sound.Effect)
 		{
 			audioSources[(int)Define.Sound.Effect].Play();
+		}
+		//ui
+		else
+		{
+			audioSources[(int)Define.Sound.UI].Play();
 		}
 	}
 
@@ -193,9 +212,15 @@ public class SoundManager : MonoBehaviour
 			if (!audioSource.isPlaying)
 				audioSource.Play();
 		}
-		else
+		else if (type == Define.Sound.Effect)
 		{
 			AudioSource audioSource = audioSources[(int)Define.Sound.Effect];
+			audioSource.volume = volume;
+			audioSource.PlayOneShot(audioClip);
+		}
+		else
+		{
+			AudioSource audioSource = audioSources[(int)Define.Sound.UI];
 			audioSource.volume = volume;
 			audioSource.PlayOneShot(audioClip);
 		}

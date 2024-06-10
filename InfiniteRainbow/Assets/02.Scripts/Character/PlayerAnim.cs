@@ -74,6 +74,7 @@ public class PlayerAnim : MonoBehaviour
 
     public void Dead()
     {
+        pawn.destroyEfect.Play();
         Destroy(pawn.gameObject);
     }
 }

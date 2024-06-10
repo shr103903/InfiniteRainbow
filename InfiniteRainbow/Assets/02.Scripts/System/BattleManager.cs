@@ -88,6 +88,15 @@ public class BattleManager : MonoBehaviour
     [SerializeField]
     private DisplayPawnData displayDataPanel = null;
 
+    [SerializeField]
+    private GameObject finishPanel = null;
+
+    [SerializeField]
+    private TMP_Text resultStageText = null;
+
+    [SerializeField]
+    private TMP_Text maxStageText = null;
+
     public List<Pawn> targetList = new List<Pawn>();
 
     [HideInInspector]
@@ -165,6 +174,15 @@ public class BattleManager : MonoBehaviour
             StartCoroutine(sceneBuildCor);
             //GameManager.instance.NextGame();
         }
+        else if (Input.GetKeyDown(KeyCode.H))
+        {
+            if (sceneBuildCor != null)
+            {
+                StopCoroutine(sceneBuildCor);
+            }
+            sceneBuildCor = CorDefeat();
+            StartCoroutine(sceneBuildCor);
+        }
 
         if (waitingAction)
         {
@@ -196,6 +214,7 @@ public class BattleManager : MonoBehaviour
 
     public void OpenOption()
     {
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
         optionCanvas.SetActive(true);
         if (toastCor != null)
         {
@@ -210,6 +229,7 @@ public class BattleManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
         optionCanvas.SetActive(false);
         SoundManager.instance.ActiveSoundPanel(false);
         if (quitWarningPanel.activeSelf)
@@ -221,6 +241,7 @@ public class BattleManager : MonoBehaviour
 
     public void SaveGame()
     {
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
         if (GameManager.instance.SaveGame())
         {
             saveToastText.text = $"저장 완료";
@@ -248,26 +269,31 @@ public class BattleManager : MonoBehaviour
 
     public void OpenSoundPanel()
     {
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
         SoundManager.instance.ActiveSoundPanel(true);
     }
 
     public void QuitGameButton()
     {
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
         quitWarningPanel.SetActive(true);
     }
 
     public void QuitYes()
     {
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
         Application.Quit();
     }
 
     public void QuitNo()
     {
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
         quitWarningPanel.SetActive(false);
     }
 
     public void DisplayPawnData(Pawn pawn)
     {
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
         displayDataPanel.DisplayData(pawn);
     }
 
@@ -279,6 +305,7 @@ public class BattleManager : MonoBehaviour
 
     public void SetDifficulty(int difficulty)
     {
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
         this.difficulty = difficulty;
         if (sceneBuildCor != null)
         {
@@ -290,6 +317,7 @@ public class BattleManager : MonoBehaviour
 
     public void SetMap(int num)
     {
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
         GameManager.instance.mapNum = num;
         if (sceneBuildCor != null)
         {
@@ -310,6 +338,7 @@ public class BattleManager : MonoBehaviour
         {
             return;
         }
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
 
         if (sceneBuildCor != null)
         {
@@ -384,6 +413,12 @@ public class BattleManager : MonoBehaviour
         curActiveAtkBtn = true;
         atkButton.Active(true);
         finisherButton.Active(false);
+    }
+
+    public void Main()
+    {
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
+        GameManager.instance.Main();
     }
 
     public void ActiveMapSelect(bool active)
@@ -494,13 +529,18 @@ public class BattleManager : MonoBehaviour
     {
         if(playerList.Count == 0)
         {
-            Debug.Log("패배");
-            GameManager.instance.Defeat();
+            //Debug.Log("패배");
+            if (sceneBuildCor != null)
+            {
+                StopCoroutine(sceneBuildCor);
+            }
+            sceneBuildCor = CorDefeat();
+            StartCoroutine(sceneBuildCor);
             return;
         }
         else if (enemyList.Count == 0)
         {
-            Debug.Log("승리");
+            //Debug.Log("승리");
             SetSelectStatus();
             if (sceneBuildCor != null)
             {
@@ -559,6 +599,31 @@ public class BattleManager : MonoBehaviour
             statusButtonList[i].num = num;
             statusButtonList[i].SetText();
         }
+    }
+
+    private void FinishGame()
+    {
+        finishPanel.SetActive(true);
+        resultStageText.text = $"{StatusData.floor}층";
+        int maxFloor = 0;
+        if (PlayerPrefs.HasKey("MaxFloor"))
+        {
+            maxFloor = PlayerPrefs.GetInt("MaxFloor");
+            if (maxFloor < StatusData.floor)
+            {
+                maxFloor = StatusData.floor;
+                PlayerPrefs.SetInt("MaxFloor", maxFloor);
+            }
+        }
+        else
+        {
+            maxFloor = StatusData.floor;
+            PlayerPrefs.SetInt("MaxFloor", maxFloor);
+        }
+        maxStageText.text = $"{maxFloor}층";
+
+        StatusData.SetData();
+        FadeInOutUI.instance.StartFadeIn();
     }
 
     private void SetTurn(ref List<Pawn> list)
@@ -640,6 +705,7 @@ public class BattleManager : MonoBehaviour
             HpPanel hpPanel = GameObject.Instantiate(hpPanelPrefab, hpCanvas).GetComponent<HpPanel>();
             pawn.hpPanel = hpPanel;
             hpPanel.pawn = pawn;
+            hpPanel.ChangeBackColor(pawn.color);
             hpPanel.transform.position = Camera.main.WorldToScreenPoint(pawn.hpPanelPosition.position);
             hpPanel.transform.position = new Vector3(hpPanel.transform.position.x, hpPanel.transform.position.y, 0);
         }
@@ -762,5 +828,12 @@ public class BattleManager : MonoBehaviour
     {
         statusSelectParent.SetActive(true);
         FadeInOutUI.instance.StartFadeIn();
+    }
+
+    private IEnumerator CorDefeat()
+    {
+        FadeInOutUI.instance.StartFadeOut(FinishGame);
+        yield return null;
+        StopCoroutine(sceneBuildCor);
     }
 }

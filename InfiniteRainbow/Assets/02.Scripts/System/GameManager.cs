@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     {
         ResetStatus();
         NextGame();
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
     }
 
     public void LoadGame()
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
         {
             NextGame();
         }
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
     }
 
     public bool SaveGame()
@@ -89,16 +91,19 @@ public class GameManager : MonoBehaviour
 
     public void Quit()
     {
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
         Application.Quit();
     }
 
     public void ActiveSoundPanel(bool active)
     {
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
         SoundManager.instance.ActiveSoundPanel(active);
     }
 
     public void NextGame()
     {
+        SoundManager.instance.Play("UI/Button", Define.Sound.UI);
         if (sceneCor != null)
         {
             StopCoroutine(sceneCor);
@@ -147,7 +152,7 @@ public class GameManager : MonoBehaviour
         StatusData.floor++;
     }
 
-    public void Defeat()
+    public void Main()
     {
         if(sceneCor != null)
         {

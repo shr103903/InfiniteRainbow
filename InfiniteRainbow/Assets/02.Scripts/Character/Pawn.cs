@@ -29,6 +29,8 @@ public class Pawn : MonoBehaviour
 
     public Sprite pawnSprite = null;
 
+    public Color color = new Color(0, 0, 0, 125);
+
     public int pawnNumber = 0;
 
     public bool player = false;
@@ -54,6 +56,24 @@ public class Pawn : MonoBehaviour
     public string attackExplain = "";
 
     public string finisherExplain = "";
+
+    public ParticleSystem burnEfect = null;
+
+    public ParticleSystem freezeEfect = null;
+
+    public ParticleSystem destroyEfect = null;
+
+    [SerializeField]
+    private ParticleSystem hitEfect = null;
+
+    [SerializeField]
+    private ParticleSystem missEfect = null;
+
+    [SerializeField]
+    private ParticleSystem buffEffect = null;
+
+    [SerializeField]
+    private ParticleSystem debuffEffect = null;
 
     [SerializeField]
     protected float physicalAtkResistance = 0;
@@ -176,6 +196,7 @@ public class Pawn : MonoBehaviour
         if (random.NextDouble() * 100 < dodge + def * 0.05 && player)
         {
             //Debug.Log("회피 성공");
+            missEfect.Play();
             return false;
         }
 
@@ -206,6 +227,7 @@ public class Pawn : MonoBehaviour
         }
         if(damageResult <= 0)
         {
+            missEfect.Play();
             return false;
         }
         if (player)
@@ -222,6 +244,7 @@ public class Pawn : MonoBehaviour
         //    Debug.Log(damageResult + "데이지 타격");
         //}
 
+        hitEfect.Play();
         if (haveShield)
         {
             if (shieldHp > damageResult)
@@ -260,6 +283,7 @@ public class Pawn : MonoBehaviour
                 GameManager.instance.battleManager.FinishAction();
             }
             Destroy(hpPanel.gameObject);
+            destroyEfect.transform.parent = null;
 
             GameManager.instance.battleManager.Killed(this);
             return true;
@@ -310,29 +334,30 @@ public class Pawn : MonoBehaviour
         if (buffName.Equals(Buff.Speed))
         {
             speed += (int)percent;
-            Debug.Log(gameObject.name + "속도 증가 버프");
+            //Debug.Log(gameObject.name + "속도 증가 버프");
             GameManager.instance.battleManager.ChangePawnSpeed();
         }
         else if (buffName.Equals(Buff.ATKUp))
         {
             atkUpPercent += percent;
-            Debug.Log(gameObject.name + "공격력 증가 버프");
+            //Debug.Log(gameObject.name + "공격력 증가 버프");
         }
         else if (buffName.Equals(Buff.DEFUp))
         {
             defUpPercent += percent;
-            Debug.Log(gameObject.name + "방어력 증가 버프");
+            //Debug.Log(gameObject.name + "방어력 증가 버프");
         }
         else if (buffName.Equals(Buff.CriticalChance))
         {
             criticalChance += percent;
-            Debug.Log(gameObject.name + "치확 증가 버프");
+            //Debug.Log(gameObject.name + "치확 증가 버프");
         }
         else if (buffName.Equals(Buff.CriticalMultiplier))
         {
             criticalMultiplier += percent;
-            Debug.Log(gameObject.name + "치피 증가 버프");
+            //Debug.Log(gameObject.name + "치피 증가 버프");
         }
+        PlayBuffEffect();
     }
 
     public void GetDebuff(Debuff debuffName, int turn, float percent)
@@ -343,14 +368,25 @@ public class Pawn : MonoBehaviour
         if (debuffName.Equals(Debuff.Speed))
         {
             speed -= (int)percent;
-            Debug.Log(gameObject.name + "속도 감소 디버프");
+            //Debug.Log(gameObject.name + "속도 감소 디버프");
             GameManager.instance.battleManager.ChangePawnSpeed();
         }
         else if (debuffName.Equals(Debuff.DEFUp))
         {
             defUpPercent -= percent;
-            Debug.Log(gameObject.name + "방어력 감소 디버프");
+            //Debug.Log(gameObject.name + "방어력 감소 디버프");
         }
+        debuffEffect.Play();
+    }
+
+    public void PlayBuffEffect()
+    {
+        buffEffect.Play();
+    }
+
+    public void PlayDebuffEffect()
+    {
+        debuffEffect.Play();
     }
 
     public void FinishBuff(Buff buffName, float percent, int buffIndex)
@@ -359,28 +395,28 @@ public class Pawn : MonoBehaviour
         if (buffName.Equals(Buff.Speed))
         {
             speed -= (int)percent;
-            Debug.Log(gameObject.name + "속도 증가 버프 삭제");
+            //Debug.Log(gameObject.name + "속도 증가 버프 삭제");
             GameManager.instance.battleManager.ChangePawnSpeed();
         }
         else if (buffName.Equals(Buff.ATKUp))
         {
             atkUpPercent -= percent;
-            Debug.Log(gameObject.name + "공격력 증가 버프 삭제");
+            //Debug.Log(gameObject.name + "공격력 증가 버프 삭제");
         }
         else if (buffName.Equals(Buff.DEFUp))
         {
             defUpPercent -= percent;
-            Debug.Log(gameObject.name + "방어력 증가 버프 삭제");
+            //Debug.Log(gameObject.name + "방어력 증가 버프 삭제");
         }
         else if (buffName.Equals(Buff.CriticalChance))
         {
             criticalChance -= percent;
-            Debug.Log(gameObject.name + "치확 증가 버프 삭제");
+            //Debug.Log(gameObject.name + "치확 증가 버프 삭제");
         }
         else if (buffName.Equals(Buff.CriticalMultiplier))
         {
             criticalMultiplier -= percent;
-            Debug.Log(gameObject.name + "치피 증가 버프 삭제");
+            //Debug.Log(gameObject.name + "치피 증가 버프 삭제");
         }
     }
 
@@ -390,13 +426,13 @@ public class Pawn : MonoBehaviour
         if (debuffName.Equals(Debuff.Speed))
         {
             speed += (int)percent;
-            Debug.Log(gameObject.name + "속도 감소 디버프 삭제");
+            //Debug.Log(gameObject.name + "속도 감소 디버프 삭제");
             GameManager.instance.battleManager.ChangePawnSpeed();
         }
         else if (debuffName.Equals(Debuff.DEFUp))
         {
             defUpPercent += percent;
-            Debug.Log(gameObject.name + "방어력 감소 디버프 삭제");
+            //Debug.Log(gameObject.name + "방어력 감소 디버프 삭제");
         }
     }
 
