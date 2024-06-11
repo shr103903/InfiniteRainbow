@@ -193,7 +193,7 @@ public class Pawn : MonoBehaviour
         }
 
         // 회피
-        if (random.NextDouble() * 100 < dodge + def * 0.05 && player)
+        if (random.NextDouble() * 100 < (dodge > 70.0f? 70.0f : dodge) + (player? def * 0.05 : 0.0f))
         {
             //Debug.Log("회피 성공");
             missEfect.Play();

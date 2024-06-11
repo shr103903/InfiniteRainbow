@@ -85,7 +85,15 @@ public class DisplayPawnData : MonoBehaviour
             {
                 speed += (2 + 1 * i) * StatusData.speedUpgrade[i];
             }
+        }
 
+        if(def > 70.0f)
+        {
+            def = 70.0f;
+        }
+        if(dodge > 70.0f)
+        {
+            dodge = 70.0f;
         }
     }
 }
