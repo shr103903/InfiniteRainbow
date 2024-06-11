@@ -163,26 +163,26 @@ public class BattleManager : MonoBehaviour
                 OpenOption();
             }
         }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            SetSelectStatus();
-            if (sceneBuildCor != null)
-            {
-                StopCoroutine(sceneBuildCor);
-            }
-            sceneBuildCor = CorWin();
-            StartCoroutine(sceneBuildCor);
-            //GameManager.instance.NextGame();
-        }
-        else if (Input.GetKeyDown(KeyCode.H))
-        {
-            if (sceneBuildCor != null)
-            {
-                StopCoroutine(sceneBuildCor);
-            }
-            sceneBuildCor = CorDefeat();
-            StartCoroutine(sceneBuildCor);
-        }
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    SetSelectStatus();
+        //    if (sceneBuildCor != null)
+        //    {
+        //        StopCoroutine(sceneBuildCor);
+        //    }
+        //    sceneBuildCor = CorWin();
+        //    StartCoroutine(sceneBuildCor);
+        //    //GameManager.instance.NextGame();
+        //}
+        //else if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    if (sceneBuildCor != null)
+        //    {
+        //        StopCoroutine(sceneBuildCor);
+        //    }
+        //    sceneBuildCor = CorDefeat();
+        //    StartCoroutine(sceneBuildCor);
+        //}
 
         if (waitingAction)
         {
