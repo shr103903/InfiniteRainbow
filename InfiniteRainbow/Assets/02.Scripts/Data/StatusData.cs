@@ -1,6 +1,7 @@
 public static class StatusData
 {
     public static int floor = 0;
+    public static int mapNum = 0;
 
     public static int[] hpUpgrade = new int[3];
     public static int[] atkUpgrade = new int[3];
@@ -13,6 +14,7 @@ public static class StatusData
     public static void SetData()
     {
         floor = 0;
+        mapNum = 0;
 
         hpUpgrade = new int[] { 0, 0, 0 };
         atkUpgrade = new int[] { 0, 0, 0 };
@@ -29,6 +31,7 @@ public static class StatusData
     {
         JsonData data = new JsonData();
         data.floor = floor;
+        data.mapNum = mapNum;
         data.hpUpgrade = new int[3];
         for (int i = 0; i < 3; i++)
         {

@@ -8,6 +8,7 @@ using UnityEngine;
 public class JsonData
 {
     public int floor;
+    public int mapNum;
 
     public int[] hpUpgrade;
     public int[] atkUpgrade;
@@ -20,10 +21,18 @@ public class JsonData
 
 public class JsonUtil : MonoBehaviour
 {
-    public bool SaveData()
+    public bool SaveData(bool inGame = false)
     {
         JsonData data = new JsonData();
-        data.floor = StatusData.floor;
+        if (!inGame)
+        {
+            data.floor = StatusData.floor;
+        }
+        else
+        {
+            data.floor = StatusData.floor - 1;
+        }
+        data.mapNum = StatusData.mapNum;
         data.hpUpgrade = new int[3];
         for (int i = 0; i < 3; i++)
         {
@@ -96,6 +105,7 @@ public class JsonUtil : MonoBehaviour
                 try
                 {
                     StatusData.floor = data.floor;
+                    StatusData.mapNum = data.mapNum;
                     for (int i = 0; i < 3; i++)
                     {
                         StatusData.hpUpgrade[i] = data.hpUpgrade[i];

@@ -14,9 +14,6 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> playerList = new List<GameObject>();
 
-    [HideInInspector]
-    public int mapNum = 0;
-
     public List<EnemyDeckData> map01LowEnemyDeckDataList = new List<EnemyDeckData>();
     public List<EnemyDeckData> map01MediumEnemyDeckDataList = new List<EnemyDeckData>();
     public List<EnemyDeckData> map01HighEnemyDeckDataList = new List<EnemyDeckData>();
@@ -84,9 +81,9 @@ public class GameManager : MonoBehaviour
         SoundManager.instance.Play("UI/Button", Define.Sound.UI);
     }
 
-    public bool SaveGame()
+    public bool SaveGame(bool inGame = false)
     {
-        return saveJsonUtil.SaveData();
+        return saveJsonUtil.SaveData(inGame);
     }
 
     public void Quit()
@@ -132,11 +129,11 @@ public class GameManager : MonoBehaviour
                 return;
             }
             battleManager.ActiveMapSelect(false);
-            if (GameManager.instance.mapNum == 0)
+            if (StatusData.mapNum == 0)
             {
                 SoundManager.instance.Play("BGM/Desert", Define.Sound.Bgm);
             }
-            else if (GameManager.instance.mapNum == 1)
+            else if (StatusData.mapNum == 1)
             {
                 SoundManager.instance.Play("BGM/Forest", Define.Sound.Bgm);
             }
@@ -201,7 +198,7 @@ public class GameManager : MonoBehaviour
 
     public EnemyDeckData GetEnemyDeck(int difficulty)
     {
-        if(mapNum == 0)
+        if(StatusData.mapNum == 0)
         {
             if (StatusData.floor % 5 == 0)
             {
@@ -220,7 +217,7 @@ public class GameManager : MonoBehaviour
                 return map01HighEnemyDeckDataList[random.Next(map01HighEnemyDeckDataList.Count)];
             }
         }
-        else if (mapNum == 1)
+        else if (StatusData.mapNum == 1)
         {
             if (StatusData.floor % 5 == 0)
             {

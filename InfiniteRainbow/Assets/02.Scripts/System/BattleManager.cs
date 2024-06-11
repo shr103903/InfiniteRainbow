@@ -242,7 +242,7 @@ public class BattleManager : MonoBehaviour
     public void SaveGame()
     {
         SoundManager.instance.Play("UI/Button", Define.Sound.UI);
-        if (GameManager.instance.SaveGame())
+        if (GameManager.instance.SaveGame(true))
         {
             saveToastText.text = $"저장 완료";
         }
@@ -318,7 +318,7 @@ public class BattleManager : MonoBehaviour
     public void SetMap(int num)
     {
         SoundManager.instance.Play("UI/Button", Define.Sound.UI);
-        GameManager.instance.mapNum = num;
+        StatusData.mapNum = num;
         if (sceneBuildCor != null)
         {
             StopCoroutine(sceneBuildCor);
@@ -329,7 +329,7 @@ public class BattleManager : MonoBehaviour
 
     public void BuildMap()
     {
-        GameObject map = GameObject.Instantiate(mapPrefab[GameManager.instance.mapNum]);
+        GameObject map = GameObject.Instantiate(mapPrefab[StatusData.mapNum]);
     }
 
     public void StartBattle()
@@ -349,11 +349,11 @@ public class BattleManager : MonoBehaviour
 
         if (StatusData.floor % 5 == 1)
         {
-            if (GameManager.instance.mapNum == 0)
+            if (StatusData.mapNum == 0)
             {
                 SoundManager.instance.Play("BGM/Desert", Define.Sound.Bgm);
             }
-            else if (GameManager.instance.mapNum == 1)
+            else if (StatusData.mapNum == 1)
             {
                 SoundManager.instance.Play("BGM/Forest", Define.Sound.Bgm);
             }
